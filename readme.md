@@ -11,7 +11,7 @@
     ```cmd
     node -v
     ```
-    <i>expected result:
+    expected result:
     ```cmd
     v16.14.2
     ```
@@ -20,7 +20,7 @@
     ```cmd
     npm -v
     ```
-    <i>expected result:
+    expected result:
     ```cmd
     6.14.17
     ```
@@ -29,8 +29,16 @@
     ```cmd
     docker -v
     ```
-    <i>expected result:
+    expected result:
     ```cmd
     Docker version 20.10.7, build f0df350
     ```
 
+
+### Running the project
+1. `cd dev-apps`
+2. `docker-compose up`
+3. <b>Wait 2-3 min for Databases and Api retry connection</b>
+4.  Open Chrome/Firefox and browse to
+- http://localhost:2200/health-check
+- http://localhost:2200/users

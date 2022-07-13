@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  api:
+    build: ../apps/server/
+    depends_on:
+      - mongodb_container
+      - db
+    ports:
+      - 2200:2200
+
+  mongodb_container:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+      
+  db:
+    ports:
+      - 3306:3306
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_USER: root
+    volumes:
+      - "./mysql:/docker-entrypoint-initdb.d/:ro"
+
+volumes:
+  mongodb_data_container:

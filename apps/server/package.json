@@ -1,0 +1,33 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-dev": "NODE_ENV=development nodemon index.js",
+    "start": "node index.js",
+    "install-globals": "npm install typescript -g nodemon -g"
+  },
+  "dependencies": {
+    "concurrently": "^6.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "joi": "^17.4.0",
+    "mongodb": "^4.8.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.7",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/joi": "^17.2.3",
+    "@types/express": "^4.17.12",
+    "@types/node": "^15.12.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
