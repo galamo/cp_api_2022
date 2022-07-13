@@ -12,4 +12,4 @@ CREATE TABLE `shopping-app`.`users` (
   PRIMARY KEY (`id`));
 
 
-INSERT INTO `shopping-app`.`users` (`user_name`, `first_name`, `last_name`, `password`) VALUES ('ziv@ziv.com', 'ziv', 'ziva', 'e10adc3949ba59abbe56e057f20f883e'),('ziv@ziv.com1', 'ziv1', 'ziva1', 'e10adc3949ba59abbe56e057f20f883e'),('ziv@ziv.com2', 'ziv2', 'ziva2', 'e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO `shopping-app`.`users` (`user_name`, `first_name`, `last_name`, `password`) VALUES ('checkpoint@checkpoint.com', 'dev', 'dev', 'e10adc3949ba59abbe56e057f20f883e');

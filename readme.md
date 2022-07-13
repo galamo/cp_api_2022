@@ -41,4 +41,12 @@
 3. <b>Wait 2-3 min for Databases and Api retry connection</b>
 4.  Open Chrome/Firefox and browse to
 - http://localhost:2200/health-check
+    expected result:
+    ```cmd
+    {"message":"api is ready"}
+    ```
 - http://localhost:2200/users
+    expected result:
+    ```cmd
+    {"result":{"id":1,"user_name":"checkpoint@checkpoint.com","first_name":"dev","last_name":"dev"}}
+    ```
