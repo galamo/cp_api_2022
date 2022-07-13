@@ -4,6 +4,7 @@
 - [Node.js version 16 installed](https://nodejs.org/en/download/)
 - NPM installed (part of Node.js installation) 
 - [Docker for desktop installed](https://docs.docker.com/desktop/install/windows-install/)
+- [Create react app package](https://www.npmjs.com/package/create-react-app)
 
 ###### Verification
 - open command line & run the following commands:
