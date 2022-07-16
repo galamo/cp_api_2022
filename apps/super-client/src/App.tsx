@@ -5,7 +5,7 @@ import './App.css';
 
 function App() {
 
- 
+
 
 
   return (
@@ -29,3 +29,39 @@ function App() {
 }
 
 export default App;
+
+
+const ReactCheckPoint = (() => {
+  
+  const useState = (initialState: any) => {
+
+    let currentState = initialState
+
+    const setterFunction = (value: any) => {
+      currentState = value
+    }
+
+    return [currentState, setterFunction]
+  }
+
+  return {
+    useState
+  }
+
+
+})()
+
+const { useState } = ReactCheckPoint;
+
+const MyComponent = () => {
+  const [value, setValue] = useState(1)
+  if (value !== 2) {
+    setValue(2)
+  }
+  const render = () => { console.log(value) }
+  return { render };
+}
+MyComponent().render()
+MyComponent().render()
+
+
