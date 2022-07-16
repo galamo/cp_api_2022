@@ -1,4 +1,5 @@
 import React, { useEffect, useLayoutEffect } from 'react';
+import axios from "axios";
 import logo from './logo.svg';
 import './App.css';
 
@@ -8,9 +9,9 @@ function App() {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
     axios
-      .get(API, {
+      .get("https://restcountries.com/v3.1/all", {
         cancelToken: source.token
-      })
+      }).then(console.log)
       .catch((err) => {
         if (axios.isCancel(err)) {
           console.log('successfully aborted');
@@ -19,6 +20,7 @@ function App() {
         }
       });
     return () => {
+      console.log("unmounted")
       // cancel the request before component unmounts
       source.cancel();
     };
