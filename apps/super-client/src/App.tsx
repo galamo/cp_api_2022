@@ -16,12 +16,11 @@ function App() {
         if (axios.isCancel(err)) {
           console.log('successfully aborted');
         } else {
-          // handle error
+          // handle error1
         }
       });
     return () => {
       console.log("unmounted")
-      // cancel the request before component unmounts
       source.cancel();
     };
   }, []);
