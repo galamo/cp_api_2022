@@ -154,6 +154,10 @@ based on your information
 />
 
 ```
+### EX-1 Typescript
+1. Create the following inteface: `ICountry`
+2. country will have: name, flag, total population
+3. create instance for israel country and print it.
 
 ### EX-2
 - Add New Route Countries Route

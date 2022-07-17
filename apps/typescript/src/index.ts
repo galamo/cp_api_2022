@@ -1,4 +1,21 @@
 console.log("typescript file ")
 const userName: string = "galamouyal88@gmail.com"
 const age: number = 33;
-console.log(userName, age)
+
+interface IUser {
+    userName: string;
+    age: number;
+    address: { city: string }
+}
+
+const user: IUser = {
+    userName: "gal",
+    age: 33,
+    address: { city: "Ashdod" }
+}
+console.log(typeof user)
+
+function getUserAddress(user: IUser): string | undefined {
+    if (typeof user !== 'object') return;
+    return user.address.city
+}
