@@ -32,36 +32,44 @@ export default App;
 
 
 const ReactCheckPoint = (() => {
-  
+  let currentState: any = []
+  let index = 0
+  console.log(currentState)
   const useState = (initialState: any) => {
-
-    let currentState = initialState
-
-    const setterFunction = (value: any) => {
-      currentState = value
+    const localIndex = index
+    index++;
+    if (!currentState[localIndex]) {
+      currentState[localIndex] = initialState
     }
-
-    return [currentState, setterFunction]
+    const setterFunction = (value: any) => {
+      currentState[localIndex] = value
+    }
+    return [currentState[localIndex], setterFunction]
   }
-
+  const resetIndex = () => index = 0
   return {
-    useState
+    useState,
+    resetIndex
   }
 
 
 })()
 
-const { useState } = ReactCheckPoint;
+const { useState, resetIndex } = ReactCheckPoint;
 
 const MyComponent = () => {
   const [value, setValue] = useState(1)
+  const [name, setName] = useState("gal")
   if (value !== 2) {
-    setValue(2)
+    setValue(value + 1)
+    setName("gad")
   }
-  const render = () => { console.log(value) }
+
+  const render = () => { console.log(value, name) }
   return { render };
 }
 MyComponent().render()
+resetIndex()
 MyComponent().render()
 
 
