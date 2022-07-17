@@ -1,0 +1,14 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc --watch",
+    "start": "nodemon ./dist/index.js",
+    "globals": "npm install typescript -g nodemon -g"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
