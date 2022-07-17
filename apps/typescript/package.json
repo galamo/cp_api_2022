@@ -6,9 +6,13 @@
   "scripts": {
     "build": "tsc --watch",
     "start": "nodemon ./dist/index.js",
-    "globals": "npm install typescript -g nodemon -g"
+    "globals": "npm install typescript -g nodemon -g",
+    "all": "concurrently -k -p \"[{name}]\" -n \"tsCompile,nodeProcess\" -c \"blue,red\"  \"npm run build\" \"npm run start\""
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.2.2"
+  }
 }
