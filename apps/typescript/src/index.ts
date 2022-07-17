@@ -11,7 +11,7 @@ interface IUser {
 const user: IUser = {
     userName: "gal",
     age: 33,
-    address: { city: "Ashdod" }
+    address: { city: 1 }
 }
 console.log(typeof user)
 

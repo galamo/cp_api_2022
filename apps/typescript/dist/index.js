@@ -4,7 +4,7 @@ const age = 33;
 const user = {
     userName: "gal",
     age: 33,
-    address: { city: "Ashdod" }
+    address: { city: 1 }
 };
 console.log(typeof user);
 function getUserAddress(user) {
