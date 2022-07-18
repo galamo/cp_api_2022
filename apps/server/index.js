@@ -44,13 +44,19 @@ app.get("/countries", async (req, res, next) => {
         return next(error)
     }
 })
-
+let delayName = 0
 app.get("/countries-delay/name/:name", async (req, res, next) => {
+    delayName++;
+
     try {
         const { data } = await axios.get(`https://restcountries.com/v3.1/name/${req.params.name}`)
-        setTimeout(() => {
+        if (delayName % 2 === 0) {
+            setTimeout(() => {
+                return res.json({ data })
+            }, 6000);
+        } else {
             return res.json({ data })
-        }, 6000);
+        }
     } catch (error) {
         return next(error)
     }
