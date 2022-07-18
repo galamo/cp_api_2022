@@ -46,11 +46,19 @@
     ```cmd
     {"message":"api is ready"}
     ```
-- http://localhost:2200/users
+- http://localhost:2200/countries-delay/name/:name
+    delay response
     expected result:
     ```cmd
-    {"result":{"id":1,"user_name":"checkpoint@checkpoint.com","first_name":"dev","last_name":"dev"}}
+    {"data":[{"name":{"common":"Israel"...
     ```
+- http://localhost:2200/countries/code/isr
+    expected result:
+    ```cmd
+    {"data":[{"name":{"common":"Israel"...
+    ```
+
+
 
 
 # React
