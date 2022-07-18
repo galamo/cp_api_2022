@@ -159,6 +159,8 @@ based on your information
 2. country will have: name, flag, total population
 3. create instance for israel country and print it.
 
+### EX-2 
+1. Toggle Countries Rendering
 ### EX-2
 - Add New Route Countries Route
 ### EX-3

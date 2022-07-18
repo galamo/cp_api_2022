@@ -9,6 +9,7 @@
     "install-globals": "npm install typescript -g nodemon -g"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "concurrently": "^6.2.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",

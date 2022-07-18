@@ -3,7 +3,7 @@ const express = require("express")
 const cors = require("cors")
 const { initDB } = require("./db/mysql")
 const { getUsersHandler } = require("./users")
-
+const axios = require("axios")
 
 const app = express();
 app.use(cors())
@@ -24,6 +24,50 @@ app.get("/users", async (req, res, next) => {
         return next(error)
     }
 })
+
+app.get("/countries-delay", async (req, res, next) => {
+    try {
+        const { data } = await axios.get("https://restcountries.com/v3.1/all")
+        setTimeout(() => {
+            return res.json({ data })
+        }, 4000);
+    } catch (error) {
+        return next(error)
+    }
+})
+
+app.get("/countries", async (req, res, next) => {
+    try {
+        const { data } = await axios.get("https://restcountries.com/v3.1/all")
+        return res.json({ data })
+    } catch (error) {
+        return next(error)
+    }
+})
+
+app.get("/countries-delay/name/:name", async (req, res, next) => {
+    try {
+        const { data } = await axios.get(`https://restcountries.com/v3.1/name/${req.params.name}`)
+        setTimeout(() => {
+            return res.json({ data })
+        }, 6000);
+    } catch (error) {
+        return next(error)
+    }
+})
+
+app.get("/countries/code/:code", async (req, res, next) => {
+    try {
+        const { data } = await axios.get(`https://restcountries.com/v3.1/alpha/${req.params.code}`)
+        return res.json({ data })
+    } catch (error) {
+        return next(error)
+    }
+})
+
+
+https://restcountries.com/v3.1/alpha/{code}
+
 
 app.use((error, req, res, next) => {
     console.log(error)
