@@ -155,15 +155,30 @@ based on your information
 
 ```
 ### EX-1 Typescript
-1. Create the following inteface: `ICountry`
+1. Create the following interface: `ICountry`
 2. country will have: name, flag, total population
 3. create instance for israel country and print it.
 
+### Keys in react
+
+
 ### EX-2 
-1. Toggle Countries Rendering
-### EX-2
+1. Toggle Countries Rendering to show unmount aborting request
+2. 
+
+### EX-3 
+- Create an Image component
+- image should get a URL string
+- if the url is not valid or missing show default image
+- default image: https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482930.jpg
+- advanced - check if the image is not loaded as well and show the default image
+### EX-4
+- style css module
+- create your own style module by adding the following file to Header component
+
+### EX
 - Add New Route Countries Route
-### EX-3
+### EX
 - Go to [Countries](https://restcountries.com/v3.1/all)
 - Copy the countries from the result.
 - Open new file `data.json` inside the src folder.
@@ -171,10 +186,9 @@ based on your information
 - Present the countries in list of `CountryCard` components. 
 
 
-### EX-4
-- Create Login form 
+### EX Create Login form 
 
-### EX-5
+### EX
 - Convert the `data.json` file to `http` request
 - use useEffect
 - Store the result in your local state - use `useState`
