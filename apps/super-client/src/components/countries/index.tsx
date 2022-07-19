@@ -10,13 +10,17 @@ export function CountriesPage() {
     const [countryName, setCountryName] = useState(initialCountry)
     const [countries, setCountries] = useState(countriesInitialState)
 
+    const cancelToken = axios.CancelToken;
+    const source = cancelToken.source()
 
 
     useEffect(() => {
         console.log("React Countries component useEffect")
         async function getCountries() {
             try {
-                const { data } = await axios.get(`http://localhost:2200/countries-delay/name/${countryName}`)
+                const { data } = await axios.get(`http://localhost:2200/countries-delay/name/${countryName}`, {
+                    cancelToken: source.token
+                })
                 console.log(data.data)
                 setCountries(data.data)
             } catch (ex) {
@@ -31,6 +35,7 @@ export function CountriesPage() {
         if (countryName) getCountries()
         return () => {
             console.log("React Countries component cleanup...")
+            source.cancel()
         }
 
     }, [countryName])

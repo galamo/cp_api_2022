@@ -4,6 +4,7 @@ const cors = require("cors")
 const { initDB } = require("./db/mysql")
 const { getUsersHandler } = require("./users")
 const axios = require("axios")
+NODE_TLS_REJECT_UNAUTHORIZED = 0
 
 const app = express();
 app.use(cors())
