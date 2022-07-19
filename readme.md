@@ -25,6 +25,10 @@
     ```cmd
     6.14.17
     ```
+    in case you are working with other npm version please run
+    ```
+    npm install npm@6.14.17 -g
+    ```
     <br>
 3.   
     ```cmd

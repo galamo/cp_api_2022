@@ -7,7 +7,7 @@ const axios = require("axios")
 
 const app = express();
 app.use(cors())
-initDB()
+// initDB()
 
 app.use((req, res, next) => {
     next()
