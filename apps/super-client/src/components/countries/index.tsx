@@ -1,14 +1,24 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { HeaderApplication } from "../ui-components/header"
 import axios from "axios"
+import debounce from "lodash/debounce"
+import CountryCard from "../ui-components/country"
 
 export function CountriesPage() {
-    const cancelToken = axios.CancelToken
-    const source = cancelToken.source()
+    const initialCountry: string = ""
+    const countriesInitialState: Array<any> = []
+    const [countryName, setCountryName] = useState(initialCountry)
+    const [countries, setCountries] = useState(countriesInitialState)
+
+
+
     useEffect(() => {
+        console.log("React Countries component useEffect")
         async function getCountries() {
             try {
-                const result = await axios.get("https://restcountries.com/v3.1/all", { cancelToken: source.token })
+                const { data } = await axios.get(`http://localhost:2200/countries-delay/name/${countryName}`)
+                console.log(data.data)
+                setCountries(data.data)
             } catch (ex) {
                 if (axios.isCancel(ex)) {
                     console.log("successfully aborted")
@@ -18,18 +28,30 @@ export function CountriesPage() {
                 console.log(ex)
             }
         }
-        getCountries()
+        if (countryName) getCountries()
         return () => {
-            console.log("unmounting..")
-            source.cancel();
+            console.log("React Countries component cleanup...")
         }
 
-    }, [])
-
+    }, [countryName])
+    const handleChange = (e: any) => {
+        const { value } = e.target
+        if (!value) return
+        setCountryName(value)
+    }
+    const textChangeHandler = debounce(handleChange, 400)
 
     return <div>
-        <HeaderApplication text={"Countries Page"} />
-        Countreis Data!!!
+        <div>
+            <HeaderApplication text={"Countries Page"} />
+            <input type="text" onChange={textChangeHandler} />
+            <br />
+        </div>
+        <div>
+            {Array.isArray(countries) && countries.map((c: any) => {
+                return <CountryCard region={c.region} countryName={c.name.common} flag={c.flags?.png} />
+            })}
+        </div>
     </div>
 }
 
