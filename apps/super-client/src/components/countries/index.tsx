@@ -3,6 +3,9 @@ import { HeaderApplication } from "../ui-components/header"
 import axios from "axios"
 import debounce from "lodash/debounce"
 import CountryCard from "../ui-components/country"
+import Button from '@material-ui/core/Button';
+import { CountriesStatistics } from "./statistics"
+
 
 export function CountriesPage() {
     const initialCountry: string = ""
@@ -45,18 +48,42 @@ export function CountriesPage() {
         setCountryName(value)
     }
     const textChangeHandler = debounce(handleChange, 400)
-
+    const countriesArray = Array.isArray(countries) && countries
     return <div>
         <div>
+            <Button color="primary" onClick={() => {
+                setCountries([...shuffle(countries)])
+            }}> Shuffle </Button>
             <HeaderApplication text={"Countries Page"} />
             <input type="text" onChange={textChangeHandler} />
             <br />
         </div>
         <div>
-            {Array.isArray(countries) && countries.map((c: any) => {
-                return <CountryCard region={c.region} countryName={c.name.common} flag={c.flags?.png} />
+            <CountriesStatistics countries={countriesArray} />
+        </div>
+        <div>
+            {countriesArray.map((c: any) => {
+                return <CountryCard key={c.name.common} region={c.region} countryName={c.name.common} flag={c.flags?.png} />
             })}
         </div>
-    </div>
+    </div >
 }
 
+// only for React ***
+function shuffle(array: Array<any>) {
+    let currentIndex = array.length, randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+}
