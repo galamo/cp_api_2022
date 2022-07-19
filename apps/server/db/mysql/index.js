@@ -20,10 +20,16 @@ async function initDB() {
             password,
             database,
         });
+        connection.on("connect", () => {
+            console.log("MySQL connected")
+        })
     } catch (error) {
         console.log(error);
         console.log("Application shut down due to MySQL connection error");
-        if (counter >= 3) process.exit(1)
+        if (counter >= 3) {
+            console.log("MYSQL is not connected - Partial functionality will work")
+            // process.exit(1)
+        }
         setTimeout(() => {
             initDB()
         }, 30000);
