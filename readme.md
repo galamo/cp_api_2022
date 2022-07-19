@@ -189,6 +189,13 @@ based on your information
 - style css module
 - create your own style module by adding the following file to Header component
 
+### EX-5
+- Implement Toggle Products Page
+- Create `ProductPage` component
+- fetch the products from the following api - https://dummyjson.com/products
+- Create `Product` Component
+- Present all the Products in the `ProductsPage`
+
 ### EX
 - Add New Route Countries Route
 ### EX
