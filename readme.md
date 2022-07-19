@@ -38,7 +38,7 @@
 
 ### Running the project
 1. `cd dev-apps`
-2. `docker-compose up`
+2. `docker compose up --build `
 3. <b>Wait 2-3 min for Databases and Api retry connection</b>
 4.  Open Chrome/Firefox and browse to
 - http://localhost:2200/health-check
