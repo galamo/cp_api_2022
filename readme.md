@@ -172,13 +172,13 @@ based on your information
 
 ### EX-2 
 1. Toggle Countries Rendering to show unmount aborting request
-2. 
+2. Toggle Products 
 
 ### EX-3 
 - Create an Image component
 - image should get a URL string
-- if the url is not valid or missing show default image
-- default image: https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482930.jpg
+- in case the URL is missing - present the `defaultImage`
+- `defaultImage`: https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482930.jpg
 - advanced - check if the image is not loaded as well and show the default image
 ### EX-4
 - style css module
@@ -207,6 +207,10 @@ based on your information
 ## Examples
 - useState under the hood
 - useEffect ( cleanup ) - aborting
+- installing react material
+- conditional rendering
+- creating the country component
+
 
 
 
