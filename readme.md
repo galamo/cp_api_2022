@@ -63,7 +63,8 @@
 
 # React
 
-
+# Material UI
+`npm install @material-ui/core`
 #### Api's
 - [Products](https://dummyjson.com/docs/products/)
 - [Countries](https://restcountries.com/v3.1/all)
