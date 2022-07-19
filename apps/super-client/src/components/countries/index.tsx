@@ -48,7 +48,7 @@ export function CountriesPage() {
         setCountryName(value)
     }
     const textChangeHandler = debounce(handleChange, 400)
-    const countriesArray = Array.isArray(countries) && countries
+    const countriesArray: any = Array.isArray(countries) && countries
     return <div>
         <div>
             <Button color="primary" onClick={() => {

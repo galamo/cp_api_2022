@@ -7,10 +7,9 @@ interface IProps {
 
 export function CountriesStatistics(props: IProps) {
     const { countries } = props
-    const shortCalculation = countries.map((c: any) => c.name.common).join("")
     const result = useMemo(() => {
         return calcTotalPopulation(countries)
-    }, [shortCalculation])
+    }, [JSON.stringify(props.countries)])
 
     return <div style={{ padding: "10px" }}>
         Total Population:

@@ -4,6 +4,7 @@ import './App.css';
 import LComponent from "./LcComponent_legacy"
 import { CountriesPage } from './components/countries';
 import ImageCp from './components/ui-components/imageCp';
+import Vacations from './components/vacations';
 
 
 function App() {
@@ -17,9 +18,12 @@ function App() {
     <div className="App">
 
       <div>
-        <ImageCp imageUrl={"https://www.checkpoint.com/wp-content/uploads/check-point-logo-large.png"} />
+        {/* <ImageCp imageUrl={"https://www.checkpoint.com/wp-content/uploads/check-point-logo-large.png"} />
         <ImageCp imageUrl={""} />
-        <ImageCp imageUrl={"https://www.checkpoint.com/wp-content/uploads/noimage.png"} />
+        <ImageCp imageUrl={"https://www.checkpoint.com/wp-content/uploads/noimage.png"} /> */}
+      </div>
+      <div>
+        <Vacations />
       </div>
       <div>
         <button onClick={handleToggle}> Show Countries Component </button>
