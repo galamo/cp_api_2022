@@ -196,6 +196,12 @@ based on your information
 - Create `Product` Component
 - Present all the Products in the `ProductsPage`
 
+### EX-6
+- based on your Products result
+- Memoize the Avg price
+- Present it as product statistics
+
+
 ### EX
 - Add New Route Countries Route
 ### EX
