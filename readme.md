@@ -171,18 +171,18 @@ based on your information
 
 
 ### EX-2 
-1. Toggle Countries Rendering to show unmount aborting request
-2. 
-
-### EX-3 
 - Create an Image component
 - image should get a URL string
 - if the url is not valid or missing show default image
 - default image: https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482930.jpg
 - advanced - check if the image is not loaded as well and show the default image
+
+### EX-3
+1. Solve the Debounce issue
+
 ### EX-4
 - style css module
-- create your own style module by adding the following file to Header component
+- Create the image own class with style module css
 
 ### EX
 - Add New Route Countries Route
