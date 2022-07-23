@@ -24,7 +24,6 @@ async function initDB() {
             console.log("MySQL connected")
         })
     } catch (error) {
-        console.log(error);
         console.log("Application shut down due to MySQL connection error");
         if (counter >= 3) {
             console.log("MYSQL is not connected - Partial functionality will work")
@@ -32,7 +31,7 @@ async function initDB() {
         }
         setTimeout(() => {
             initDB()
-        }, 30000);
+        }, 15000);
     }
 }
 
