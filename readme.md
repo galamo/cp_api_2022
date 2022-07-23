@@ -238,11 +238,16 @@ based on your information
 - Present it as product statistics
 
 
+### React Router DOM
 
-# Subjects 23-7
+`install react-router-dom@6`
+
+
+### Subjects 23-7
 - useRef
     1. current reference mutation
     2. reference to DOM
+- React router DOM
 - useState Vs useRef
 - useContext , useReducer
 - axios interceptor 
@@ -261,16 +266,16 @@ based on your information
 
 
 
+
+
+
+
 ## Examples
 - useState under the hood
 - useEffect ( cleanup ) - aborting
 - installing react material
 - conditional rendering
 - creating the country component
-
-
-
-
 
 # Questions
 
