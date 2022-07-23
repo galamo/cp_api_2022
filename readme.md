@@ -205,7 +205,11 @@ based on your information
 
 # Subjects 23-7
 - useRef
+    1. current reference mutation
+    2. reference to DOM
 - useState Vs useRef
+- useContext , useReducer
+- axios interceptor 
 
 
 
