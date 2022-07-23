@@ -61,9 +61,45 @@
     ```cmd
     {"data":[{"name":{"common":"Israel"...
     ```
+-  ```cmd
+    1. POST /auth/register HTTP/1.1
+    Host: localhost:2200
+    Content-Type: application/json
+    Authorization: 1
+    Content-Length: 56
 
+    {
+        "userName":"string",
+        "password":"string"
+    }
+    
+    2. POST /auth/login HTTP/1.1
+    Host: localhost:2200
+    Content-Type: application/json
+    Authorization: 1
+    Content-Length: 55
 
+    {
+        "userName":"string",
+        "password":"string"
+    }
 
+    2. POST /auth/login HTTP/1.1
+    Host: localhost:2200
+    Content-Type: application/json
+    Authorization: 1
+    Content-Length: 55
+
+    {
+        "userName":"string",
+        "password":"string"
+    }
+
+    3. GET /secure HTTP/1.1
+    Host: localhost:2200
+    Content-Type: application/json
+    Authorization: string
+```
 
 # React
 
@@ -205,7 +241,11 @@ based on your information
 
 # Subjects 23-7
 - useRef
+    1. current reference mutation
+    2. reference to DOM
 - useState Vs useRef
+- useContext , useReducer
+- axios interceptor 
 
 
 
