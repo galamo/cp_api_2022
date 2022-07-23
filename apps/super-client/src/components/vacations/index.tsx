@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, MutableRefObject, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -49,6 +49,7 @@ export default function Vacations() {
     return (
         <div style={{ padding: "10px", width: "50%", margin: "auto auto", border: "1px solid black", borderRadius: 10 }}>
             {JSON.stringify(refVacations.current)}
+            <AccessingElement />
             <FormGroup row>
                 <TextField value={currentVacation} onChange={(e: any) => {
                     setCurrentVacation(e?.target?.value)
@@ -90,4 +91,29 @@ export default function Vacations() {
             })}
         </List>
     }
+}
+
+function AccessingElement() {
+    const elementRef = useRef<HTMLInputElement>(null);
+    const [list, setList] = useState<Array<string | undefined>>([])
+
+    useEffect(() => {
+        if (elementRef && elementRef.current) {
+            elementRef.current.value = "defaultValue"
+        }
+    }, [])
+
+
+    return (
+        <div>
+            <h1> Input ref element {elementRef?.current?.value}</h1>
+            <input ref={elementRef} />
+            <button onClick={() => {
+                setList([...list, elementRef?.current?.value])
+            }}> set list </button>
+            <div>
+                {list.map(i => <h2>{i}</h2>)}
+            </div>
+        </div>
+    );
 }
