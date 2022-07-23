@@ -202,22 +202,21 @@ based on your information
 - Present it as product statistics
 
 
+
+# Subjects 23-7
+- useRef
+- useState Vs useRef
+
+
+
 ### EX
 - Add New Route Countries Route
-### EX
-- Go to [Countries](https://restcountries.com/v3.1/all)
-- Copy the countries from the result.
-- Open new file `data.json` inside the src folder.
-- Import the data.
-- Present the countries in list of `CountryCard` components. 
+
 
 
 ### EX Create Login form 
 
-### EX
-- Convert the `data.json` file to `http` request
-- use useEffect
-- Store the result in your local state - use `useState`
+
 
 
 
