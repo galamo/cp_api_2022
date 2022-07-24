@@ -1,4 +1,5 @@
 import React from "react"
+import { Link, useNavigate } from "react-router-dom"
 import ImageCp from "../imageCp"
 import css from "./style.module.css"
 
@@ -14,10 +15,10 @@ export default function CountryCard(props: IProps) {
     return <div className={css.card} style={{ display: "inline-block", margin: "10px" }}>
         <ImageCp imageUrl={flag} />
         <div className={css.card}>
-            <h4>{countryName}</h4>
+            <h4><Link to={`/country-page/${countryName}`}>{countryName}</Link></h4>
             <p>{region}</p>
-        </div>
-    </div>
+        </div >
+    </div >
 
 
 

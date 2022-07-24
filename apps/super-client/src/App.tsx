@@ -10,6 +10,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NotFoundPage from './components/pages/notFoundPage';
 import Register from './components/pages/register';
 import Login from './components/pages/login';
+import CountryPage from './components/pages/countryPage';
 
 export interface IRoute {
   path: string,
@@ -32,6 +33,12 @@ export const routes = [
     element: <CountriesPage />,
     text: "countries",
     isVisible: true
+  },
+  {
+    path: "/country-page/:name",
+    element: <CountryPage />,
+    text: "countries",
+
   },
   {
     path: "*",
