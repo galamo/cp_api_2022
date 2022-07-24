@@ -238,6 +238,17 @@ based on your information
 - Present it as product statistics
 
 
+### EX-7
+- Create A button in login page: "click here to register"
+- Clicking on the button will move the client ot the registration page
+- Remove the register from the router
+
+
+### EX-8
+- implement the login component
+- please see the POST Login operation
+
+
 ### React Router DOM
 
 `install react-router-dom@6`
