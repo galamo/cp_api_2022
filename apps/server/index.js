@@ -78,14 +78,16 @@ app.get("/countries/code/:code", async (req, res, next) => {
 let authUsers = [{ userName: "master", password: "master" }]
 app.post("/auth/register", async (req, res, next) => {
     try {
-        const { userName, password } = req.body
-        console.log("register", userName, password)
-        if (!userName || !password) return res.status(400).send()
-        const foundOne = authUsers.findIndex(u => u.userName === userName)
-        console.log(foundOne)
-        if (foundOne >= 0) return res.status(400).json({ message: `${userName} user already exist` })
-        authUsers.push({ userName, password })
-        return res.json({ message: "Registered!" })
+        setTimeout(() => {
+            const { userName, password } = req.body
+            console.log("register", userName, password)
+            if (!userName || !password) return res.status(400).send()
+            const foundOne = authUsers.findIndex(u => u.userName === userName)
+            console.log(foundOne)
+            if (foundOne >= 0) return res.status(400).json({ message: `${userName} user already exist` })
+            authUsers.push({ userName, password })
+            return res.json({ message: "Registered!" })
+        }, 3000);
     } catch (error) {
         return next(error)
     }

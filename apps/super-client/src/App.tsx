@@ -11,6 +11,7 @@ import NotFoundPage from './components/pages/notFoundPage';
 import Register from './components/pages/register';
 import Login from './components/pages/login';
 import CountryPage from './components/pages/countryPage';
+import SecurePage from './components/pages/securePage';
 
 export interface IRoute {
   path: string,
@@ -34,7 +35,6 @@ export const routes = [
     text: "countries",
     isVisible: true
   },
-
   {
     path: "*",
     element: <NotFoundPage />,
@@ -55,6 +55,12 @@ export const routes = [
     path: "/login",
     element: <Login />,
     text: "login",
+    isVisible: true
+  },
+  {
+    path: "/secure",
+    element: <SecurePage />,
+    text: "secure page",
     isVisible: true
   },
 

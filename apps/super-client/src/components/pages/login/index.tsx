@@ -1,27 +1,47 @@
-import React, { useEffect, useRef } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import axios from "axios"
 import { Button, TextField } from "@material-ui/core"
-
+import { axiosInstance } from "../../../services/axios.index"
 
 export default function Login() {
-    const userNameRef = useRef<HTMLInputElement>()
-    const passwordRef = useRef<HTMLInputElement>()
+    const [userName, setUserName] = useState("")
+    const [password, setPassword] = useState("")
+
+    const userNameHandler = useCallback((e: any) => {
+        setUserName(e.target.value)
+    }, [userName])
+
+    const passwordHandler = useCallback((e: any) => {
+        setPassword(e.target.value)
+    }, [password])
+
+    async function loginAction({ userName, password }: { userName: string, password: string }) {
+        try {
+            const { data } = await axiosInstance.post("/auth/login", {
+                userName, password
+            })
+            const { token } = data;
+            window.localStorage.setItem("token", token)
+        } catch (ex) {
+            console.log("error", ex)
+        }
+    }
 
     return <div>
         <h1> Login </h1>
         <form noValidate autoComplete="off">
             <div>
-                <TextField inputRef={userNameRef} id="standard-basic" label="username" />
+                <TextField onChange={userNameHandler} name={"userName"} id="standard-basic" label="username" />
             </div>
             <div>
-                <TextField inputRef={passwordRef} id="standard-basic" label="password" />
+                <TextField onChange={passwordHandler} id="standard-basic" label="password" />
             </div>
             <div>
                 <Button onClick={() => {
-                    // TODO: Login
+                    loginAction({ userName, password })
                 }} > Submit </Button>
             </div>
-        </form>
+        </form >
 
-    </div>
+    </div >
 }
