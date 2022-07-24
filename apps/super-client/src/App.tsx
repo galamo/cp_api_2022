@@ -24,11 +24,12 @@ function App() {
       </div>
       <div>
         <Vacations />
+        <Vacations />
       </div>
-      <div>
+      {/* <div>
         <button onClick={handleToggle}> Show Countries Component </button>
       </div>
-      {showCountries && <CountriesPage />}
+      {showCountries && <CountriesPage />} */}
     </div>
   );
 }
