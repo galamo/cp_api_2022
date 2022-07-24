@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json())
 
 app.get("/health-check", (req, res, next) => {
-    res.json({ message: "api is ready" })
+    res.json({ message: "Api v2 is ready" })
 })
 app.get("/users", async (req, res, next) => {
     try {
