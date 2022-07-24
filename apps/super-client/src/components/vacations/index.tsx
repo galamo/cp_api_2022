@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -22,8 +22,10 @@ export default function Vacations() {
     const [counter, setCounter] = useState(0)
     const [showMessage, setShowMessage] = useState(false)
     const clickingRef = useRef(0)
+    const [showInput, setShowInput] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null)
     console.log("Vacations Component render!")
+
     const addVacationHandler = useCallback(() => {
         setVacations([...vacations, currentVacation])
     }, [currentVacation, vacations])
@@ -34,9 +36,20 @@ export default function Vacations() {
         setVacations([...vacations, value])
     }
 
+    useEffect(() => {
+        if (inputRef && inputRef.current) {
+            inputRef.current.value = "DefaultVacationValue!"
+            // inputRef.current.style.visibility = "hidden"
+        }
+    }, [showInput])
+
     const setCounterHandler = useCallback(() => {
         setCounter(counter + 1)
     }, [counter])
+
+    const showInputHandler = () => {
+        setShowInput(!showInput)
+    }
 
     const setCounterHandlerRef = () => {
         clickingRef.current++
@@ -62,13 +75,16 @@ export default function Vacations() {
                 </div>
                 <div>
                     WithRef:
-                    <input ref={inputRef} />
+                    {showInput && <input ref={inputRef} />}
                 </div>
                 <Button onClick={addVacationRefHandler} variant="contained" color="primary" disableElevation>
                     Add
                 </Button>
                 <Button onClick={setCounterHandlerRef} variant="contained" color="primary" disableElevation>
                     increase
+                </Button>
+                <Button onClick={showInputHandler} variant="contained" color="primary" disableElevation>
+                    Show input
                 </Button>
                 {showMessage && message}
             </FormGroup>

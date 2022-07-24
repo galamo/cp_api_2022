@@ -5,7 +5,39 @@ import LComponent from "./LcComponent_legacy"
 import { CountriesPage } from './components/countries';
 import ImageCp from './components/ui-components/imageCp';
 import Vacations from './components/vacations';
+import ButtonAppBar from './components/app/appBar';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import NotFoundPage from './components/pages/notFoundPage';
 
+export interface IRoute {
+  path: string,
+  element: React.ReactElement
+  text: string,
+  isVisible?: boolean
+
+
+}
+
+export const routes = [
+  {
+    path: "/",
+    element: <Vacations />,
+    text: "vacations",
+    isVisible: true
+  },
+  {
+    path: "/countries",
+    element: <CountriesPage />,
+    text: "countries",
+    isVisible: true
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
+    text: "not found"
+  }
+
+]
 
 function App() {
   const [showCountries, setShowContries] = useState(true)
@@ -16,19 +48,14 @@ function App() {
 
   return (
     <div className="App">
-
-      <div>
-        {/* <ImageCp imageUrl={"https://www.checkpoint.com/wp-content/uploads/check-point-logo-large.png"} />
-        <ImageCp imageUrl={""} />
-        <ImageCp imageUrl={"https://www.checkpoint.com/wp-content/uploads/noimage.png"} /> */}
-      </div>
-      <div>
-        <Vacations />
-      </div>
-      {/* <div>
-        <button onClick={handleToggle}> Show Countries Component </button>
-      </div>
-      {showCountries && <CountriesPage />} */}
+      <BrowserRouter>
+        <ButtonAppBar />
+        <Routes>
+          {routes.map((r: IRoute) => {
+            return <Route {...r} />
+          })}
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
