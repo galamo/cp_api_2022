@@ -13,20 +13,26 @@ import TextField from "@material-ui/core/TextField"
 import { setTimeout } from 'timers/promises';
 
 
-let c = 0;
-
+let c = 0; // DONT DO THIS
 const message = "You are Clicking the button too much"
 export default function Vacations() {
-    const initialVacations: Array<string> = ["Ibiza", "Sayshel"]
+    const initialVacations: Array<string | undefined> = ["Ibiza", "Sayshel"]
     const [vacations, setVacations] = useState(initialVacations)
     const [currentVacation, setCurrentVacation] = useState("Hawai")
     const [counter, setCounter] = useState(0)
     const [showMessage, setShowMessage] = useState(false)
     const clickingRef = useRef(0)
-
+    const inputRef = useRef<HTMLInputElement>(null)
+    console.log("Vacations Component render!")
     const addVacationHandler = useCallback(() => {
         setVacations([...vacations, currentVacation])
     }, [currentVacation, vacations])
+
+    const addVacationRefHandler = () => {
+        const value: string | undefined = inputRef?.current?.value
+        console.log(value)
+        setVacations([...vacations, value])
+    }
 
     const setCounterHandler = useCallback(() => {
         setCounter(counter + 1)
@@ -49,10 +55,16 @@ export default function Vacations() {
     return (
         <div style={{ padding: "10px", width: "50%", margin: "auto auto", border: "1px solid black", borderRadius: 10 }}>
             <FormGroup row>
-                <TextField value={currentVacation} onChange={(e: any) => {
-                    setCurrentVacation(e?.target?.value)
-                }} id="standard-basic" label="Insert Vacation" />
-                <Button onClick={addVacationHandler} variant="contained" color="primary" disableElevation>
+                <div>
+                    <TextField value={currentVacation} onChange={(e: any) => {
+                        setCurrentVacation(e?.target?.value)
+                    }} id="standard-basic" label="Insert Vacation" />
+                </div>
+                <div>
+                    WithRef:
+                    <input ref={inputRef} />
+                </div>
+                <Button onClick={addVacationRefHandler} variant="contained" color="primary" disableElevation>
                     Add
                 </Button>
                 <Button onClick={setCounterHandlerRef} variant="contained" color="primary" disableElevation>
@@ -77,7 +89,7 @@ export default function Vacations() {
 
     function VacationsList() {
         return <List >
-            {vacations.map((v: string, index: number) => {
+            {vacations.map((v: any, index: number) => {
                 return <ListItem key={v + index}>
                     <ListItemText
                         primary={v}
