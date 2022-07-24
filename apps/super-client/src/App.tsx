@@ -34,12 +34,7 @@ export const routes = [
     text: "countries",
     isVisible: true
   },
-  {
-    path: "/country-page/:name",
-    element: <CountryPage />,
-    text: "countries",
 
-  },
   {
     path: "*",
     element: <NotFoundPage />,
@@ -52,6 +47,11 @@ export const routes = [
     isVisible: true
   },
   {
+    path: "/country-page/:name",
+    element: <CountryPage />,
+    text: "TEXT"
+  },
+  {
     path: "/login",
     element: <Login />,
     text: "login",
@@ -61,35 +61,62 @@ export const routes = [
 
 ]
 
-function App() {
-  const [showCountries, setShowContries] = useState(true)
-
-  const handleToggle = () => {
-    setShowContries(!showCountries)
-  }
-
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <ButtonAppBar />
-        <Routes>
-          {routes.map((r: IRoute) => {
-            return <Route key={r.path} {...r} />
-          })}
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
-}
-//   function Users() {
-//     return <div>
-//       {users.map((u: string) => {
-//         return <h3>{u}</h3>
-//       })}
-//     </div>
-
+// function App() {
+//   try {
+//     return (
+//       <div className="App">
+//         <BrowserRouter>
+//           <ButtonAppBar />
+//           <Routes>
+//             {routes.map((r: IRoute) => {
+//               return <Route key={r.path} {...r} />
+//             })}
+//           </Routes>
+//         </BrowserRouter>
+//       </div>
+//     );
+//   } catch (ex) {
+//     return <h1> Sorry something went wrong, and we are working to fix it <a href="/"> Click to refresh </a> </h1>
 //   }
 // }
+
+
+class App extends React.Component<any, any, any>{
+  constructor(props: any) {
+    super(props)
+    this.state = { showError: false }
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
+    this.setState({ showError: true })
+  }
+
+
+  render() {
+    if (this.state.showError) {
+      return <ErrorComponent />
+    }
+    else {
+      return (
+        <div className="App" >
+          <BrowserRouter>
+            <ButtonAppBar />
+            <Routes>
+              {routes.map((r: IRoute) => {
+                return <Route key={r.path} {...r} />
+              })}
+            </Routes>
+          </BrowserRouter>
+        </div>
+      )
+    }
+
+  }
+}
+
+function ErrorComponent() {
+  return <h1> Sorry something went wrong, and we are working to fix it <a href="/"> Click to refresh </a> </h1>
+}
 
 export default App;
 

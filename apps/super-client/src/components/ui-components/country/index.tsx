@@ -15,10 +15,10 @@ export default function CountryCard(props: IProps) {
     return <div className={css.card} style={{ display: "inline-block", margin: "10px" }}>
         <ImageCp imageUrl={flag} />
         <div className={css.card}>
-            <h4><Link to={`/country-page/${countryName}`}>{countryName}</Link></h4>
+            <Link to={`/country-page/${countryName}`}><h4>{countryName}</h4></Link>
             <p>{region}</p>
-        </div >
-    </div >
+        </div>
+    </div>
 
 
 

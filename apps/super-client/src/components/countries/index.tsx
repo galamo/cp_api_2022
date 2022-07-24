@@ -5,6 +5,9 @@ import debounce from "lodash/debounce"
 import CountryCard from "../ui-components/country"
 import Button from '@material-ui/core/Button';
 import { CountriesStatistics } from "./statistics"
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { WithLoading } from "../ui-components/withLoading"
+
 
 
 export function CountriesPage() {
@@ -12,7 +15,7 @@ export function CountriesPage() {
     const countriesInitialState: Array<any> = []
     const [countryName, setCountryName] = useState(initialCountry)
     const [countries, setCountries] = useState(countriesInitialState)
-
+    const [isLoading, setIsLoading] = useState(false)
     const cancelToken = axios.CancelToken;
     const source = cancelToken.source()
 
@@ -20,19 +23,21 @@ export function CountriesPage() {
     useEffect(() => {
         console.log("React Countries component useEffect")
         async function getCountries() {
+            setIsLoading(true)
             try {
                 const { data } = await axios.get(`http://localhost:2200/countries-delay/name/${countryName}`, {
                     cancelToken: source.token
                 })
                 console.log(data.data)
                 setCountries(data.data)
+                setIsLoading(false)
             } catch (ex) {
                 if (axios.isCancel(ex)) {
                     console.log("successfully aborted")
                 } else {
                     console.log("handle a real error!")
                 }
-                console.log(ex)
+                setIsLoading(false)
             }
         }
         if (countryName) getCountries()
@@ -62,11 +67,24 @@ export function CountriesPage() {
             <CountriesStatistics countries={countriesArray} />
         </div>
         <div>
-            {countriesArray.map((c: any) => {
-                return <CountryCard key={c.name.common} region={c.region} countryName={c.name.common} flag={c.flags?.png} />
-            })}
+            <WithLoading isLoading={isLoading}>
+                <CountriesCards countriesArray={countriesArray} />
+            </WithLoading>
         </div>
     </div >
+}
+
+function CountriesCards(props: { countriesArray: Array<any> }) {
+    // if (!Array.isArray(props.countriesArray)) return <h2> No data!</h2>
+    // if (props.isLoading) return <CircularProgress />
+
+    return <>
+        {
+            props.countriesArray.map((c: any) => {
+                return <CountryCard key={c.name.common} region={c.region} countryName={c.name.common} flag={c.flags?.png} />
+            })
+        }
+    </>
 }
 
 // only for React ***
