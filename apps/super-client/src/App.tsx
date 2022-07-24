@@ -8,6 +8,8 @@ import Vacations from './components/vacations';
 import ButtonAppBar from './components/app/appBar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NotFoundPage from './components/pages/notFoundPage';
+import Register from './components/pages/register';
+import Login from './components/pages/login';
 
 export interface IRoute {
   path: string,
@@ -35,7 +37,20 @@ export const routes = [
     path: "*",
     element: <NotFoundPage />,
     text: "not found"
-  }
+  },
+  {
+    path: "/register",
+    element: <Register />,
+    text: "register",
+    isVisible: true
+  },
+  {
+    path: "/login",
+    element: <Login />,
+    text: "login",
+    isVisible: true
+  },
+
 
 ]
 
@@ -52,7 +67,7 @@ function App() {
         <ButtonAppBar />
         <Routes>
           {routes.map((r: IRoute) => {
-            return <Route {...r} />
+            return <Route key={r.path} {...r} />
           })}
         </Routes>
       </BrowserRouter>

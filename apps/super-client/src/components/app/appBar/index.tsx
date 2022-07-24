@@ -29,11 +29,10 @@ export default function ButtonAppBar() {
                     <Typography variant="h6" className={classes.title}>
                         {routes.filter(r => r.isVisible).map((r: IRoute) => {
                             return <span>
-                                <Link to={r.path}> {r.text.toUpperCase()}</Link>
+                                <Link key={r.path} to={r.path}> {r.text.toUpperCase()}</Link>
                             </span>
                         })}
-                        {/* <span> <Link to="countries"> Countries</Link> </span>
-                        <span> <Link to="/" > Vacations</Link> </span> */}
+
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
