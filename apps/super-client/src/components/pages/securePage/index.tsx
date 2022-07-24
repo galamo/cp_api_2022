@@ -5,16 +5,20 @@ import { WithLoading } from "../../ui-components/withLoading"
 
 export default function SecurePage() {
     const [checkpointMessage, setCheckpointMessage] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         async function onLoad() {
             try {
+                setIsLoading(true)
                 const { data } = await axiosInstance.get("/secure")
                 const { secureMessage } = data
                 setCheckpointMessage(secureMessage)
             } catch (ex) {
                 console.log("error from component")
                 // Define error response
+            }finally{
+                setIsLoading(false)
             }
         }
         onLoad()
@@ -22,7 +26,7 @@ export default function SecurePage() {
 
     return <div>
 
-        <WithLoading isLoading={Boolean(checkpointMessage)}>
+        <WithLoading isLoading={isLoading}>
             <span>{checkpointMessage}</span>
         </WithLoading>
 

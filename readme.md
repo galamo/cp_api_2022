@@ -72,17 +72,6 @@
         "userName":"string",
         "password":"string"
     }
-    
-    2. POST /auth/login HTTP/1.1
-    Host: localhost:2200
-    Content-Type: application/json
-    Authorization: 1
-    Content-Length: 55
-
-    {
-        "userName":"string",
-        "password":"string"
-    }
 
     2. POST /auth/login HTTP/1.1
     Host: localhost:2200

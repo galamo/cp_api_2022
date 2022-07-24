@@ -6,7 +6,7 @@ import { CountriesPage } from './components/countries';
 import ImageCp from './components/ui-components/imageCp';
 import Vacations from './components/vacations';
 import ButtonAppBar from './components/app/appBar';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import NotFoundPage from './components/pages/notFoundPage';
 import Register from './components/pages/register';
 import Login from './components/pages/login';
@@ -17,7 +17,8 @@ export interface IRoute {
   path: string,
   element: React.ReactElement
   text: string,
-  isVisible?: boolean
+  isVisible?: boolean,
+  isProtected?: boolean
 
 
 }
@@ -58,14 +59,25 @@ export const routes = [
     isVisible: true
   },
   {
-    path: "/secure",
+    path: "secure",
     element: <SecurePage />,
     text: "secure page",
-    isVisible: true
+    isVisible: true,
+    isProtected: true
   },
 
 
+
+
 ]
+
+
+
+const ProtectedRoute = () => {
+  const auth = window.localStorage.getItem("token")
+  return auth ? <Outlet /> : <Navigate to="/login" />;
+
+};
 
 // function App() {
 //   try {
@@ -109,7 +121,9 @@ class App extends React.Component<any, any, any>{
             <ButtonAppBar />
             <Routes>
               {routes.map((r: IRoute) => {
-                return <Route key={r.path} {...r} />
+                return r.isProtected ? <Route path='/' element={<ProtectedRoute />}>
+                  <Route key={r.path} {...r} />
+                </Route> : <Route key={r.path} {...r} />
               })}
             </Routes>
           </BrowserRouter>

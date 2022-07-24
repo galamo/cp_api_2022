@@ -28,8 +28,8 @@ export default function ButtonAppBar() {
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
                         {routes.filter(r => r.isVisible).map((r: IRoute) => {
-                            return <span>
-                                <Link key={r.path} to={r.path}> {r.text.toUpperCase()}</Link>
+                            return <span key={r.path}>
+                                <Link to={r.path}> {r.text.toUpperCase()}</Link>
                             </span>
                         })}
 
