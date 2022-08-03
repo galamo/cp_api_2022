@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import LComponent from "./LcComponent_legacy"
-import { CountriesPage } from './components/countries';
+import { CountriesPage } from './components/pages/countries';
 import ImageCp from './components/ui-components/imageCp';
-import Vacations from './components/vacations';
+import Vacations from './components/pages/vacations';
 import ButtonAppBar from './components/app/appBar';
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import NotFoundPage from './components/pages/notFoundPage';
@@ -24,16 +24,17 @@ export interface IRoute {
 }
 
 export const routes = [
+
   {
     path: "/",
-    element: <Vacations />,
-    text: "vacations",
+    element: <CountriesPage />,
+    text: "countries",
     isVisible: true
   },
   {
-    path: "/countries",
-    element: <CountriesPage />,
-    text: "countries",
+    path: "/vacations",
+    element: <Vacations />,
+    text: "vacations",
     isVisible: true
   },
   {
@@ -64,7 +65,7 @@ export const routes = [
     text: "secure page",
     isVisible: true,
     isProtected: true
-  },
+  }
 
 
 

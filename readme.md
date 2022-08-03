@@ -258,16 +258,19 @@ based on your information
 - useContext , useReducer
 - nested routes
 
-### EX
+### EX - 9
 - Add New Route Countries Route
 
 
 
-### EX Create Login form 
+### EX Create Login form - 10
 
 
-
-
+## Subjects
+1. Redux toolkit
+2. code splitting
+3. useReducer, useContext
+4. async operations
 
 
 

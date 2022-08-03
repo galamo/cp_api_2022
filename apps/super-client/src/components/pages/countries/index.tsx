@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
-import { HeaderApplication } from "../ui-components/header"
+import { HeaderApplication } from "../../ui-components/header"
 import axios from "axios"
 import debounce from "lodash/debounce"
-import CountryCard from "../ui-components/country"
+import CountryCard from "../../ui-components/country"
 import Button from '@material-ui/core/Button';
 import { CountriesStatistics } from "./statistics"
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { WithLoading } from "../ui-components/withLoading"
+import { WithLoading } from "../../ui-components/withLoading"
 
 
 
@@ -59,7 +59,7 @@ export function CountriesPage() {
             <Button color="primary" onClick={() => {
                 setCountries([...shuffle(countries)])
             }}> Shuffle </Button>
-            <HeaderApplication text={"Countries Page"} />
+            <HeaderApplication text={"Countries Page"} color={"black"} />
             <input type="text" onChange={textChangeHandler} />
             <br />
         </div>
