@@ -240,7 +240,7 @@ based on your information
 
 ### React Router DOM
 
-`install react-router-dom@6`
+`npm install react-router-dom@6`
 
 
 ### Subjects 23-7
@@ -251,8 +251,12 @@ based on your information
 - useState Vs useRef
 - useContext , useReducer
 - axios interceptor 
+- nested rotes
 
 
+### Subjects 4-8
+- useContext , useReducer
+- nested routes
 
 ### EX
 - Add New Route Countries Route

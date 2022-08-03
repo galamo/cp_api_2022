@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom';
 import { IRoute, routes } from "../../../App";
+import css from "./style.module.css"
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -28,11 +29,10 @@ export default function ButtonAppBar() {
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
                         {routes.filter(r => r.isVisible).map((r: IRoute) => {
-                            return <span key={r.path}>
+                            return <span key={r.path} className={css.linkButton}>
                                 <Link to={r.path}> {r.text.toUpperCase()}</Link>
                             </span>
                         })}
-
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>

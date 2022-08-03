@@ -1,0 +1,13 @@
+.linkButton>a {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.linkButton {
+    padding: 5px;
+    opacity: 0.8;
+}
+
+.linkButton:hover {
+    opacity: 1
+}
