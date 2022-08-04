@@ -282,6 +282,11 @@ based on your information
 5. optimize your component load with React.memo
 
 
+### EX - 11 useContext & useReducer
+1. Create AppDate component which present the current date when reports loaded
+2. support toggle functionality - between local and UTC 
+3. use Switch component `https://v4.mui.com/components/switches/`
+
 
 
 
