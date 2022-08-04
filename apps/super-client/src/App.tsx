@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import LComponent from "./LcComponent_legacy"
@@ -12,6 +12,10 @@ import Register from './components/pages/register';
 import Login from './components/pages/login';
 import CountryPage from './components/pages/countryPage';
 import SecurePage from './components/pages/securePage';
+import Reports from './components/pages/reports';
+import { CircularProgress } from '@material-ui/core';
+
+const ReportsLazy = React.lazy(() => import("./components/pages/reports"))
 
 export interface IRoute {
   path: string,
@@ -65,6 +69,13 @@ export const routes = [
     text: "secure page",
     isVisible: true,
     isProtected: true
+  },
+  {
+    path: "reports",
+    element: <ReportsLazy />,
+    text: "Reports",
+    isVisible: true,
+    isProtected: false
   }
 
 
@@ -120,13 +131,15 @@ class App extends React.Component<any, any, any>{
         <div className="App" >
           <BrowserRouter>
             <ButtonAppBar />
-            <Routes>
-              {routes.map((r: IRoute) => {
-                return r.isProtected ? <Route path='/' element={<ProtectedRoute />}>
-                  <Route key={r.path} {...r} />
-                </Route> : <Route key={r.path} {...r} />
-              })}
-            </Routes>
+            <Suspense fallback={<CircularProgress />}>
+              <Routes>
+                {routes.map((r: IRoute) => {
+                  return r.isProtected ? <Route key={r.path} path='/' element={<ProtectedRoute />}>
+                    <Route key={r.path} {...r} />
+                  </Route> : <Route key={r.path} {...r} />
+                })}
+              </Routes>
+            </Suspense>
           </BrowserRouter>
         </div>
       )

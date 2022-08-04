@@ -27,7 +27,7 @@ export default function SecurePage() {
     return <div>
 
         <WithLoading isLoading={isLoading}>
-            <span>{checkpointMessage}</span>
+            <h1>{checkpointMessage}</h1>
         </WithLoading>
 
     </div >
