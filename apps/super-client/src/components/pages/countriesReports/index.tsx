@@ -2,8 +2,9 @@ import React, { useEffect, useState, useMemo, useContext } from "react"
 import axios from "axios"
 import { HeaderApplication } from "../../ui-components/header";
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
-import { GlobalState } from "../../../App";
 import { negate } from "lodash";
+import { SettingsContext } from "../../providers/settingsProvider";
+import AppDate from "../../app/appDate";
 
 
 
@@ -25,7 +26,7 @@ export default function CountriesReportsPage() {
     const countriesInitialState: Array<any> = []
     const [countries, setCountries] = useState(countriesInitialState)
     const [isLoading, setIsLoading] = useState(false)
-    const globalState = useContext(GlobalState)
+    const globalState = useContext(SettingsContext)
     const cancelToken = axios.CancelToken;
     const source = cancelToken.source()
     console.log("Update from CountriesReportsPage")
@@ -68,6 +69,9 @@ export default function CountriesReportsPage() {
     return <div>
         <div>
             <HeaderApplication text={"Countries Page"} color={"black"} />
+        </div>
+        <div>
+            This Data is updated to: <AppDate currentDate={new Date().toString()} />
         </div>
         <div style={{ width: "500px", height: "100px", margin: "auto" }}>
 

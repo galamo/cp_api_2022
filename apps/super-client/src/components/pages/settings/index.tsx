@@ -1,13 +1,14 @@
-import { Button } from "@material-ui/core";
+import { Button, Switch } from "@material-ui/core";
 import React, { useContext } from "react";
-import { GlobalState } from "../../../App";
+import { SettingsContext } from "../../providers/settingsProvider";
+
 
 
 
 
 
 export default function Settings() {
-    const { dispatch, pieChartSettings } = useContext(GlobalState)
+    const { dispatch, pieChartSettings, isUtc } = useContext(SettingsContext)
     const dispatchFn = dispatch as Function;
     console.log("Update from Settings")
     return <div>
@@ -15,5 +16,12 @@ export default function Settings() {
         <h4> {pieChartSettings} </h4>
         <Button onClick={() => { dispatchFn({ type: "SET_PIECHART_SETTINGS", payload: "precentage" }) }} > Precentage </Button>
         <Button onClick={() => { dispatchFn({ type: "SET_PIECHART_SETTINGS", payload: "numbers" }) }} > Numbers </Button>
+        <Switch
+            checked={isUtc}
+            onChange={() => {
+                dispatchFn({ type: "SET_ISUTC" })
+            }}
+            name="is utc"
+        />
     </div>
 }
