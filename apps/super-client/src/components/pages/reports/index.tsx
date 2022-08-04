@@ -56,41 +56,52 @@ for (let index = 0; index < 1500; index++) {
 
 }
 
+
+const MemoizedReports = React.memo(LineChartComponent)
 export default function Reports() {
     const [amt, setAMTLine] = useState(false)
     const [size, setSize] = useState(300)
+    const [windowSize, setWindowSize] = useState("none")
     return (
-        <div style={{ padding: "20px" }} >
-            <button onClick={() => { setAMTLine(!amt) }}> AMT </button>
-            <button onClick={() => { setSize(300) }}> Small  </button>
-            <button onClick={() => { setSize(450) }}> Big  </button>
-            <LineChartComponent />
+        <div style={{ display: "flex" }}>
+            <div style={{ width: "50px", display: windowSize }}>
+                Filters
+            </div>
+            <div style={{ padding: "20px", width: "100%" }} >
+                <button onClick={() => { setWindowSize("none") }}> close </button>
+                <button onClick={() => { setWindowSize("block") }}> open </button>
+
+                <button onClick={() => { setAMTLine(!amt) }}> AMT </button>
+                <button onClick={() => { setSize(300) }}> Small  </button>
+                <button onClick={() => { setSize(450) }}> Big  </button>
+                <MemoizedReports size={size} amt={amt} />
+            </div>
         </div>
     );
-    function LineChartComponent() {
-        return (<ResponsiveContainer width="100%" height={size}>
-            <LineChart
-                width={500}
-                height={300}
-                data={data}
-                margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-                {amt && <Line type="monotone" dataKey="amt" stroke="red" />}
+}
+function LineChartComponent(props: { size: any, amt: boolean }) {
+    return (<ResponsiveContainer width="100%" height={props.size}>
+        <LineChart
+            width={500}
+            height={300}
+            data={data}
+            margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+            }}
+        >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
+            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+            {props.amt && <Line type="monotone" dataKey="amt" stroke="red" />}
 
-            </LineChart>
-        </ResponsiveContainer>)
-    }
+        </LineChart>
+    </ResponsiveContainer>)
 }
 
