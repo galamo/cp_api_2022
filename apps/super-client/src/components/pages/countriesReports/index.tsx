@@ -1,7 +1,9 @@
-import React, { useEffect, useState, useMemo } from "react"
+import React, { useEffect, useState, useMemo, useContext } from "react"
 import axios from "axios"
 import { HeaderApplication } from "../../ui-components/header";
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import { GlobalState } from "../../../App";
+import { negate } from "lodash";
 
 
 
@@ -23,6 +25,7 @@ export default function CountriesReportsPage() {
     const countriesInitialState: Array<any> = []
     const [countries, setCountries] = useState(countriesInitialState)
     const [isLoading, setIsLoading] = useState(false)
+    const globalState = useContext(GlobalState)
     const cancelToken = axios.CancelToken;
     const source = cancelToken.source()
 
@@ -67,9 +70,9 @@ export default function CountriesReportsPage() {
         </div>
         <div style={{ width: "500px", height: "100px", margin: "auto" }}>
 
-            <MemoizedPieChart adaptedData={adaptedData} />
-            <MemoizedPieChart adaptedData={data} />
-            <MemoizedPieChart adaptedData={adaptedData} />
+            <MemoizedPieChart pieChartGlobalSettings={globalState.pieChartSettings} adaptedData={adaptedData} />
+            <MemoizedPieChart pieChartGlobalSettings={globalState.pieChartSettings} adaptedData={data} />
+            <MemoizedPieChart pieChartGlobalSettings={globalState.pieChartSettings} adaptedData={adaptedData} />
 
 
         </div>
@@ -77,7 +80,7 @@ export default function CountriesReportsPage() {
     </div>
 }
 
-function PopulationPieChart(props: { adaptedData: Array<{ name: string, value: number | any }> }) {
+function PopulationPieChart(props: { pieChartGlobalSettings: string, adaptedData: Array<{ name: string, value: number | any, }> }) {
 
     return (<PieChart width={500} height={400}>
         <Pie
@@ -85,7 +88,7 @@ function PopulationPieChart(props: { adaptedData: Array<{ name: string, value: n
             cx="50%"
             cy="50%"
             labelLine={true}
-            label={renderCustomizedLabel}
+            label={(pr: any) => { return renderCustomizedLabel({ ...pr, pieChartGlobalSettings: props.pieChartGlobalSettings }) }}
             outerRadius={200}
             fill="#8884d8"
             dataKey="value"
@@ -118,16 +121,22 @@ const adaptDataPieChart = (obj: any) => {
     })
 }
 
-const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index, label }: any) => {
+const renderCustomizedLabel = ({ cx, cy, midAngle, name, innerRadius, outerRadius, percent, index, label, value, pieChartGlobalSettings, ...rest }: any) => {
+    console.log("render customized", rest)
+
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
+    const isPrecentage = pieChartGlobalSettings === "precentage";
     return (
-        <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-            {`${(percent * 100).toFixed(0)}%`}
+        <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+            {isPrecentage ? `${(percent * 100).toFixed(0)}%` : `${name}: ${convertNumberWithCommaDelimiter(value)}`}
         </text>
-
     );
 };
 
+function convertNumberWithCommaDelimiter(n: string) {
+    return Number(parseFloat(n).toFixed(0)).toLocaleString('en', {
+        minimumFractionDigits: 0
+    });
+}

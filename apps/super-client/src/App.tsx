@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react';
+import React, { createContext, Suspense, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import LComponent from "./LcComponent_legacy"
@@ -87,11 +87,17 @@ export const routes = [
     isVisible: true,
     isProtected: false
   }
-
-
-
-
 ]
+
+interface IGlobalState {
+  pieChartSettings: string
+}
+
+const initialState: IGlobalState = {
+  pieChartSettings: "precentage"
+}
+
+export const GlobalState = createContext<IGlobalState>(initialState)
 
 
 
@@ -100,26 +106,6 @@ const ProtectedRoute = () => {
   return auth ? <Outlet /> : <Navigate to="/login" />;
 
 };
-
-// function App() {
-//   try {
-//     return (
-//       <div className="App">
-//         <BrowserRouter>
-//           <ButtonAppBar />
-//           <Routes>
-//             {routes.map((r: IRoute) => {
-//               return <Route key={r.path} {...r} />
-//             })}
-//           </Routes>
-//         </BrowserRouter>
-//       </div>
-//     );
-//   } catch (ex) {
-//     return <h1> Sorry something went wrong, and we are working to fix it <a href="/"> Click to refresh </a> </h1>
-//   }
-// }
-
 
 class App extends React.Component<any, any, any>{
   constructor(props: any) {
@@ -142,13 +128,15 @@ class App extends React.Component<any, any, any>{
           <BrowserRouter>
             <ButtonAppBar />
             <Suspense fallback={<CircularProgress />}>
-              <Routes>
-                {routes.map((r: IRoute) => {
-                  return r.isProtected ? <Route key={r.path} path='/' element={<ProtectedRoute />}>
-                    <Route key={r.path} {...r} />
-                  </Route> : <Route key={r.path} {...r} />
-                })}
-              </Routes>
+              <GlobalState.Provider value={{ pieChartSettings: "numbers" }}>
+                <Routes>
+                  {routes.map((r: IRoute) => {
+                    return r.isProtected ? <Route key={r.path} path='/' element={<ProtectedRoute />}>
+                      <Route key={r.path} {...r} />
+                    </Route> : <Route key={r.path} {...r} />
+                  })}
+                </Routes>
+              </GlobalState.Provider>
             </Suspense>
           </BrowserRouter>
         </div>
