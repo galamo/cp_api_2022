@@ -16,6 +16,9 @@ import Reports from './components/pages/reports';
 import { CircularProgress } from '@material-ui/core';
 
 const ReportsLazy = React.lazy(() => import("./components/pages/reports"))
+const CountriesReportsPageLazy = React.lazy(() => import("./components/pages/countriesReports"))
+
+
 
 export interface IRoute {
   path: string,
@@ -74,6 +77,13 @@ export const routes = [
     path: "reports",
     element: <ReportsLazy />,
     text: "Reports",
+    isVisible: true,
+    isProtected: false
+  },
+  {
+    path: "countries-reports",
+    element: <CountriesReportsPageLazy />,
+    text: "Countries Reports",
     isVisible: true,
     isProtected: false
   }
