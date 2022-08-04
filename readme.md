@@ -274,6 +274,18 @@ based on your information
 
 
 
+### EX - 11 Code splitting
+1. Create New Route - `Countries Reports`
+2. use Code splitting approach to lazy load this component
+3. Add new Component Name: `PieChartCountriesPopulation` ( based on recharts)
+4. Using the countries data fetching - show every region & population on the chart
+5. optimize your component load with React.memo
+
+
+
+
+
+
 
 
 
