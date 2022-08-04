@@ -28,6 +28,7 @@ export default function CountriesReportsPage() {
     const globalState = useContext(GlobalState)
     const cancelToken = axios.CancelToken;
     const source = cancelToken.source()
+    console.log("Update from CountriesReportsPage")
 
     const result = useMemo(() => {
         return calcTotalPopulation(countries)
@@ -122,7 +123,6 @@ const adaptDataPieChart = (obj: any) => {
 }
 
 const renderCustomizedLabel = ({ cx, cy, midAngle, name, innerRadius, outerRadius, percent, index, label, value, pieChartGlobalSettings, ...rest }: any) => {
-    console.log("render customized", rest)
 
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);

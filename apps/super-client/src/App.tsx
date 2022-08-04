@@ -1,4 +1,4 @@
-import React, { createContext, Suspense, useState } from 'react';
+import React, { createContext, Suspense, useReducer, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import LComponent from "./LcComponent_legacy"
@@ -14,6 +14,7 @@ import CountryPage from './components/pages/countryPage';
 import SecurePage from './components/pages/securePage';
 import Reports from './components/pages/reports';
 import { CircularProgress } from '@material-ui/core';
+import Settings from './components/pages/settings';
 
 const ReportsLazy = React.lazy(() => import("./components/pages/reports"))
 const CountriesReportsPageLazy = React.lazy(() => import("./components/pages/countriesReports"))
@@ -86,11 +87,19 @@ export const routes = [
     text: "Countries Reports",
     isVisible: true,
     isProtected: false
+  },
+  {
+    path: "settings",
+    element: <Settings />,
+    text: "Settings",
+    isVisible: true,
+    isProtected: false
   }
 ]
 
 interface IGlobalState {
-  pieChartSettings: string
+  pieChartSettings: string,
+  dispatch?: Function
 }
 
 const initialState: IGlobalState = {
@@ -107,43 +116,59 @@ const ProtectedRoute = () => {
 
 };
 
-class App extends React.Component<any, any, any>{
-  constructor(props: any) {
-    super(props)
-    this.state = { showError: false }
-  }
+// class App extends React.Component<any, any, any>{
+//   constructor(props: any) {
+//     super(props)
+//     this.state = { showError: false }
+//   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
-    this.setState({ showError: true })
-  }
+//   componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
+//     this.setState({ showError: true })
+//   }
+//   handler() {
 
-
-  render() {
-    if (this.state.showError) {
-      return <ErrorComponent />
+//   }
+function reducerFn(state: IGlobalState, action: { type: string, payload?: any }) {
+  switch (action.type) {
+    case "SET_PIECHART_SETTINGS": {
+      return { ...state, pieChartSettings: action.payload }
     }
-    else {
-      return (
-        <div className="App" >
-          <BrowserRouter>
-            <ButtonAppBar />
-            <Suspense fallback={<CircularProgress />}>
-              <GlobalState.Provider value={{ pieChartSettings: "numbers" }}>
-                <Routes>
-                  {routes.map((r: IRoute) => {
-                    return r.isProtected ? <Route key={r.path} path='/' element={<ProtectedRoute />}>
-                      <Route key={r.path} {...r} />
-                    </Route> : <Route key={r.path} {...r} />
-                  })}
-                </Routes>
-              </GlobalState.Provider>
-            </Suspense>
-          </BrowserRouter>
-        </div>
-      )
+    default: {
+      return state;
     }
-
   }
+}
+function App() {
+
+  // @ts-ignore
+
+  const [state, dispatch] = useReducer(reducerFn, initialState)
+
+  // if (this.state.showError) {
+  //   return <ErrorComponent />
+  // }
+
+  return (
+    <div className="App" >
+      <BrowserRouter>
+        <ButtonAppBar />
+        <Suspense fallback={<CircularProgress />}>
+          <GlobalState.Provider value={{ pieChartSettings: (state as any).pieChartSettings, dispatch }}>
+            <Routes>
+              {routes.map((r: IRoute) => {
+                return r.isProtected ? <Route key={r.path} path='/' element={<ProtectedRoute />}>
+                  <Route key={r.path} {...r} />
+                </Route> : <Route key={r.path} {...r} />
+              })}
+            </Routes>
+          </GlobalState.Provider>
+        </Suspense>
+      </BrowserRouter>
+    </div>
+  )
+
+
+
 }
 
 function ErrorComponent() {
