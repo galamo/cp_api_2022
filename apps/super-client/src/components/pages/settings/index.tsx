@@ -1,15 +1,18 @@
 import { Button } from "@material-ui/core";
 import React, { useContext } from "react";
-import { GlobalState } from "../../../App";
+import { GlobalState } from "../../../providers";
+
 
 
 
 
 
 export default function Settings() {
+
     const { dispatch, pieChartSettings } = useContext(GlobalState)
+    console.log("Update from Settings", dispatch)
     const dispatchFn = dispatch as Function;
-    console.log("Update from Settings")
+
     return <div>
         <h1> Pie chart settings </h1>
         <h4> {pieChartSettings} </h4>

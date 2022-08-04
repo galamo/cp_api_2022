@@ -15,6 +15,7 @@ import SecurePage from './components/pages/securePage';
 import Reports from './components/pages/reports';
 import { CircularProgress } from '@material-ui/core';
 import Settings from './components/pages/settings';
+import { SettingsProvider } from './providers';
 
 const ReportsLazy = React.lazy(() => import("./components/pages/reports"))
 const CountriesReportsPageLazy = React.lazy(() => import("./components/pages/countriesReports"))
@@ -97,16 +98,7 @@ export const routes = [
   }
 ]
 
-interface IGlobalState {
-  pieChartSettings: string,
-  dispatch?: Function
-}
 
-const initialState: IGlobalState = {
-  pieChartSettings: "precentage"
-}
-
-export const GlobalState = createContext<IGlobalState>(initialState)
 
 
 
@@ -116,33 +108,13 @@ const ProtectedRoute = () => {
 
 };
 
-// class App extends React.Component<any, any, any>{
-//   constructor(props: any) {
-//     super(props)
-//     this.state = { showError: false }
-//   }
 
-//   componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
-//     this.setState({ showError: true })
-//   }
-//   handler() {
 
-//   }
-function reducerFn(state: IGlobalState, action: { type: string, payload?: any }) {
-  switch (action.type) {
-    case "SET_PIECHART_SETTINGS": {
-      return { ...state, pieChartSettings: action.payload }
-    }
-    default: {
-      return state;
-    }
-  }
-}
 function App() {
 
   // @ts-ignore
 
-  const [state, dispatch] = useReducer(reducerFn, initialState)
+  // const [state, dispatch] = useReducer(reducerFn, initialState)
 
   // if (this.state.showError) {
   //   return <ErrorComponent />
@@ -153,7 +125,7 @@ function App() {
       <BrowserRouter>
         <ButtonAppBar />
         <Suspense fallback={<CircularProgress />}>
-          <GlobalState.Provider value={{ pieChartSettings: (state as any).pieChartSettings, dispatch }}>
+          <SettingsProvider>
             <Routes>
               {routes.map((r: IRoute) => {
                 return r.isProtected ? <Route key={r.path} path='/' element={<ProtectedRoute />}>
@@ -161,7 +133,7 @@ function App() {
                 </Route> : <Route key={r.path} {...r} />
               })}
             </Routes>
-          </GlobalState.Provider>
+          </SettingsProvider>
         </Suspense>
       </BrowserRouter>
     </div>

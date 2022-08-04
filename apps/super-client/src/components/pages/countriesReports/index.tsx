@@ -2,8 +2,9 @@ import React, { useEffect, useState, useMemo, useContext } from "react"
 import axios from "axios"
 import { HeaderApplication } from "../../ui-components/header";
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
-import { GlobalState } from "../../../App";
+
 import { negate } from "lodash";
+import { GlobalState } from "../../../providers";
 
 
 
