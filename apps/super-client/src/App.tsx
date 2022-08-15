@@ -147,6 +147,7 @@ function ErrorComponent() {
   return <h1> Sorry something went wrong, and we are working to fix it <a href="/"> Click to refresh </a> </h1>
 }
 
+
 export default App;
 
 

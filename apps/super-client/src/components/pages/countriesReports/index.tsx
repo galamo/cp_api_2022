@@ -32,7 +32,9 @@ export default function CountriesReportsPage() {
     console.log("Update from CountriesReportsPage")
 
     const result = useMemo(() => {
-        return calcTotalPopulation(countries)
+        const totalPerRegion = calcPopulationPerRegion(countries);
+        console.log("totalPerRegion", totalPerRegion)
+        return totalPerRegion
     }, [JSON.stringify(countries)])
 
     const adaptedData = adaptDataPieChart(result)
@@ -107,7 +109,7 @@ function PopulationPieChart(props: { pieChartGlobalSettings: string, adaptedData
 }
 
 
-function calcTotalPopulation(countries: Array<any>): number {
+function calcPopulationPerRegion(countries: Array<any>): number {
     console.log("Long Calculation executed")
     return countries.reduce((regionsObj, currentCountry: any) => {
         const { region, population } = currentCountry
@@ -134,7 +136,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, name, innerRadius, outerRadiu
     const isPrecentage = pieChartGlobalSettings === "precentage";
     return (
         <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-            {isPrecentage ? `${(percent * 100).toFixed(0)}%` : `${name}: ${convertNumberWithCommaDelimiter(value)}`}
+            {isPrecentage ? `${name}: ${(percent * 100).toFixed(0)}%` : `${name}: ${convertNumberWithCommaDelimiter(value)}`}
         </text>
     );
 };
