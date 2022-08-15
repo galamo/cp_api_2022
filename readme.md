@@ -292,6 +292,13 @@ based on your information
 2. Testing
 
 
+### EX - 13 
+1. Write a unit test for region population calculation function - `calcPopulationPerRegion`
+- test correct flow
+- false positive
+- null / string calculation 
+
+
 
 
 
