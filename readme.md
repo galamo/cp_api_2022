@@ -267,10 +267,9 @@ based on your information
 
 
 ## Subjects
-1. Redux toolkit
-2. code splitting
-3. useReducer, useContext
-4. async operations
+1. code splitting
+2. useReducer, useContext
+3. async operations
 
 
 
@@ -287,6 +286,10 @@ based on your information
 2. support toggle functionality - between local and UTC 
 3. use Switch component `https://v4.mui.com/components/switches/`
 
+
+### Subjects:
+1. Redux toolkit 
+2. Testing
 
 
 
