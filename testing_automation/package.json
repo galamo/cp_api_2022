@@ -1,0 +1,17 @@
+{
+  "name": "my-automation-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "nodejs.js",
+  "scripts": {
+    "test": "mocha --timeout 1000000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "selenium-webdriver": "^4.3.1"
+  }
+}

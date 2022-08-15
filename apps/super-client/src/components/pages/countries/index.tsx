@@ -60,7 +60,7 @@ export function CountriesPage() {
                 setCountries([...shuffle(countries)])
             }}> Shuffle </Button>
             <HeaderApplication text={"Countries Page"} color={"black"} />
-            <input type="text" onChange={textChangeHandler} />
+            <input id="c_input" type="text" onChange={textChangeHandler} />
             <br />
         </div>
         <div>
@@ -81,7 +81,7 @@ function CountriesCards(props: { countriesArray: Array<any> }) {
     return <>
         {
             props.countriesArray.map((c: any) => {
-                return <CountryCard key={c.name.common} region={c.region} countryName={c.name.common} flag={c.flags?.png} />
+                return <CountryCard  key={c.name.common} region={c.region} countryName={c.name.common} flag={c.flags?.png} />
             })
         }
     </>
