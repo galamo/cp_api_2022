@@ -16,6 +16,7 @@ axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
 
 axiosInstance.interceptors.response.use(successCallback, errorCallback)
 function successCallback(response: AxiosResponse) {
+    console.log("Response success")
     return response;
 }
 function errorCallback(response: any) {

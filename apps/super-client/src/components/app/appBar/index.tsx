@@ -10,6 +10,7 @@ import { IRoute, routes } from "../../../App";
 import css from "./style.module.css"
 import { Switch } from '@material-ui/core';
 import { SettingsContext } from '../../providers/settingsProvider';
+import { useAppSelector } from '../../../store/hooks';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar() {
     const classes = useStyles();
     const context = useContext(SettingsContext)
+    const { userName } = useAppSelector(state => state.settings)
 
     return (
         <div className={classes.root}>
@@ -48,6 +50,9 @@ export default function ButtonAppBar() {
                         }}
                         name="is utc"
                     />
+                    <div>
+                        <span> {userName} </span>
+                    </div>
                 </Toolbar>
             </AppBar>
         </div>

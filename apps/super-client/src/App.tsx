@@ -16,6 +16,8 @@ import Reports from './components/pages/reports';
 import { CircularProgress } from '@material-ui/core';
 import Settings from './components/pages/settings';
 import SettingsProvider from './components/providers/settingsProvider';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const ReportsLazy = React.lazy(() => import("./components/pages/reports"))
 const CountriesReportsPageLazy = React.lazy(() => import("./components/pages/countriesReports"))
@@ -119,23 +121,24 @@ function App() {
 
   return (
     <div className="App" >
-      <BrowserRouter>
-        <SettingsProvider>
-          <>
-            <ButtonAppBar />
-            <Suspense fallback={<CircularProgress />}>
-              <Routes>
-                {routes.map((r: IRoute) => {
-                  return r.isProtected ? <Route key={r.path} path='/' element={<ProtectedRoute />}>
-                    <Route key={r.path} {...r} />
-                  </Route> : <Route key={r.path} {...r} />
-                })}
-              </Routes>
-            </Suspense>
-          </>
-        </SettingsProvider>
-      </BrowserRouter>
-
+      <Provider store={store}>
+        <BrowserRouter>
+          <SettingsProvider>
+            <>
+              <ButtonAppBar />
+              <Suspense fallback={<CircularProgress />}>
+                <Routes>
+                  {routes.map((r: IRoute) => {
+                    return r.isProtected ? <Route key={r.path} path='/' element={<ProtectedRoute />}>
+                      <Route key={r.path} {...r} />
+                    </Route> : <Route key={r.path} {...r} />
+                  })}
+                </Routes>
+              </Suspense>
+            </>
+          </SettingsProvider>
+        </BrowserRouter>
+      </Provider>
     </div>
   )
 
