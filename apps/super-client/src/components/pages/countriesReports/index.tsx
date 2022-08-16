@@ -107,8 +107,9 @@ function PopulationPieChart(props: { pieChartGlobalSettings: string, adaptedData
 }
 
 
-function calcTotalPopulation(countries: Array<any>): number {
+function calcTotalPopulation(countries: Array<any>): number | undefined {
     console.log("Long Calculation executed")
+    if (!countries) return;
     return countries.reduce((regionsObj, currentCountry: any) => {
         const { region, population } = currentCountry
         if (!region || !population) return regionsObj
@@ -120,7 +121,8 @@ function calcTotalPopulation(countries: Array<any>): number {
     }, {})
 }
 
-const adaptDataPieChart = (obj: any) => {
+const adaptDataPieChart = (obj: any): any => {
+    if (!obj) return;
     return Object.entries(obj).map(([key, value]) => {
         return { name: key, value }
     })
