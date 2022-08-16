@@ -6,6 +6,8 @@ import { negate } from "lodash";
 import { SettingsContext } from "../../providers/settingsProvider";
 import AppDate from "../../app/appDate";
 import { useAppSelector } from "../../../store/hooks";
+import getProductsAction from "../../../store/async actions/countries";
+import { WithLoading } from "../../ui-components/withLoading";
 
 
 
@@ -23,39 +25,20 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 const RADIAN = Math.PI / 180;
 const MemoizedPieChart = React.memo(PopulationPieChart)
 export default function CountriesReportsPage() {
-    const initialCountry: string = ""
     const countriesInitialState: Array<any> = []
-    const [countries, setCountries] = useState(countriesInitialState)
-    const [isLoading, setIsLoading] = useState(false)
-    const globalState = useContext(SettingsContext)
-    const { resolution } = useAppSelector(state => state.settings)
+    // const [countries, setCountries] = useState(countriesInitialState)
+    const resolution = useAppSelector(state => state.settings.resolution)
+    const { countries, isLoading } = useAppSelector(state => state.countries)
     const cancelToken = axios.CancelToken;
     const source = cancelToken.source()
-
+    console.log(countries)
     const result = useMemo(() => {
         return calcTotalPopulation(countries)
     }, [JSON.stringify(countries)])
 
     const adaptedData = adaptDataPieChart(result)
     useEffect(() => {
-        async function getCountries() {
-            setIsLoading(true)
-            try {
-                const { data } = await axios.get(`http://localhost:2200/countries-delay`, {
-                    cancelToken: source.token
-                })
-                setCountries(data.data)
-                setIsLoading(false)
-            } catch (ex) {
-                if (axios.isCancel(ex)) {
-                    console.log("successfully aborted")
-                } else {
-                    console.log("handle a real error!")
-                }
-                setIsLoading(false)
-            }
-        }
-        getCountries()
+        getProductsAction()
         return () => {
             source.cancel()
         }
@@ -70,14 +53,13 @@ export default function CountriesReportsPage() {
         <div>
             This Data is updated to: <AppDate currentDate={new Date().toString()} />
         </div>
-        <div style={{ width: "500px", height: "100px", margin: "auto" }}>
-
-            <MemoizedPieChart pieChartGlobalSettings={resolution} adaptedData={adaptedData} />
-            <MemoizedPieChart pieChartGlobalSettings={resolution} adaptedData={data} />
-            <MemoizedPieChart pieChartGlobalSettings={resolution} adaptedData={adaptedData} />
-
-
-        </div>
+        <WithLoading isLoading={isLoading}>
+            <div style={{ width: "500px", height: "100px", margin: "auto" }}>
+                <MemoizedPieChart pieChartGlobalSettings={resolution} adaptedData={adaptedData} />
+                <MemoizedPieChart pieChartGlobalSettings={resolution} adaptedData={data} />
+                <MemoizedPieChart pieChartGlobalSettings={resolution} adaptedData={adaptedData} />
+            </div>
+        </WithLoading>
 
     </div>
 }

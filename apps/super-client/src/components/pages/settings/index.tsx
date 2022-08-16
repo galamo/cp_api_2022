@@ -14,11 +14,11 @@ export default function Settings() {
     const dispatchFn = dispatch as Function;
     const inputUserNameRef = useRef<HTMLInputElement>(null)
     const appDispatch = useAppDispatch()
-    const { token, resolution } = useAppSelector(state => state.settings)
-
+    const token = useAppSelector(state => state.settings.token)
+    console.log("settings page render")
     return <div>
         <h1> Pie chart settings </h1>
-        <h4> {resolution} </h4>
+       
         <Button onClick={() => { appDispatch(setReportResolution(RESOLUTION.PRECENTAGE)) }}> Precentage </Button>
         <Button onClick={() => { appDispatch(setReportResolution(RESOLUTION.NUMBER)) }}> Numbers </Button>
         <Switch

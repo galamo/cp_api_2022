@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar() {
     const classes = useStyles();
     const context = useContext(SettingsContext)
-    const { userName } = useAppSelector(state => state.settings)
+    const userName = useAppSelector(state => state.settings.userName)
     console.log("App bar render!")
     return (
         <div className={classes.root}>
