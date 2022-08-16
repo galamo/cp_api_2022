@@ -29,23 +29,19 @@ export default function CountriesReportsPage() {
     const globalState = useContext(SettingsContext)
     const cancelToken = axios.CancelToken;
     const source = cancelToken.source()
-    console.log("Update from CountriesReportsPage")
 
     const result = useMemo(() => {
         return calcTotalPopulation(countries)
     }, [JSON.stringify(countries)])
 
     const adaptedData = adaptDataPieChart(result)
-    console.log(adaptedData)
     useEffect(() => {
-        console.log("React Countries component useEffect")
         async function getCountries() {
             setIsLoading(true)
             try {
                 const { data } = await axios.get(`http://localhost:2200/countries-delay`, {
                     cancelToken: source.token
                 })
-                console.log(data.data)
                 setCountries(data.data)
                 setIsLoading(false)
             } catch (ex) {
@@ -59,7 +55,6 @@ export default function CountriesReportsPage() {
         }
         getCountries()
         return () => {
-            console.log("React Countries component cleanup...")
             source.cancel()
         }
 

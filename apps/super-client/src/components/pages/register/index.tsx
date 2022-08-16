@@ -23,7 +23,6 @@ export default function Register() {
             const { data, statusText } = result;
             setIsLoading(false)
             if (data.message && statusText.toLowerCase() === "ok") {
-                console.log("navigatge to login...")
                 navigate("/login")
             }
         } catch (ex: any) {
@@ -35,7 +34,6 @@ export default function Register() {
 
     useEffect(() => {
         return () => {
-            console.log("Cleanup")
         }
     }, [])
 

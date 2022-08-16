@@ -41,10 +41,8 @@ export default function ButtonAppBar() {
                     <Switch
                         checked={context.isUtc}
                         onChange={() => {
-                            console.log("before dispatch")
                             // @ts-ignore
                             const { dispatch } = context;
-                            console.log(context)
                             if (typeof dispatch !== "function") return
                             dispatch({ type: "SET_ISUTC" })
                         }}

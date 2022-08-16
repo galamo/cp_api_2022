@@ -5,7 +5,6 @@ export const ReactCheckpoint = (() => {
     const useState = (initialState: any) => {
         const localIndex = index;
         index++;
-        console.log("value in hook", value)
         if (!value[localIndex]) {
             value[localIndex] = initialState
         }

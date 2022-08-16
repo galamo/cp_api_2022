@@ -21,14 +21,12 @@ export function CountriesPage() {
 
 
     useEffect(() => {
-        console.log("React Countries component useEffect")
         async function getCountries() {
             setIsLoading(true)
             try {
                 const { data } = await axios.get(`http://localhost:2200/countries-delay/name/${countryName}`, {
                     cancelToken: source.token
                 })
-                console.log(data.data)
                 setCountries(data.data)
                 setIsLoading(false)
             } catch (ex) {
@@ -42,7 +40,6 @@ export function CountriesPage() {
         }
         if (countryName) getCountries()
         return () => {
-            console.log("React Countries component cleanup...")
             source.cancel()
         }
 

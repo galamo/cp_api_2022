@@ -14,7 +14,6 @@ const initialState: IGlobalState = {
 export const SettingsContext = createContext<IGlobalState>(initialState)
 
 function settingsReducer(state: IGlobalState, action: { type: string, payload?: any }): IGlobalState {
-    console.log(action)
     switch (action.type) {
         case "SET_PIECHART_SETTINGS": {
             return { ...state, pieChartSettings: action.payload }

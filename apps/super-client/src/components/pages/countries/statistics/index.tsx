@@ -18,7 +18,6 @@ export function CountriesStatistics(props: IProps) {
 }
 
 function calcTotalPopulation(countries: Array<any>): number {
-    console.log("Long Calculation executed")
     return countries.reduce((total, currentCountry: any) => {
         if (!currentCountry.population) return total;
         return total + Number(currentCountry.population || 0)

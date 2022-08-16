@@ -15,7 +15,6 @@ export default function SecurePage() {
                 const { secureMessage } = data
                 setCheckpointMessage(secureMessage)
             } catch (ex) {
-                console.log("error from component")
                 // Define error response
             }finally{
                 setIsLoading(false)

@@ -7,7 +7,7 @@ export default class LCComponent extends React.Component<any, any>{
     }
 
     componentDidMount() {
-        console.log("Component mounted")
+        // console.log("Component mounted")
     }
 
     render(): React.ReactNode {

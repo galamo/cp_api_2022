@@ -10,7 +10,6 @@ import { SettingsContext } from "../../providers/settingsProvider";
 export default function Settings() {
     const { dispatch, pieChartSettings, isUtc } = useContext(SettingsContext)
     const dispatchFn = dispatch as Function;
-    console.log("Update from Settings")
     return <div>
         <h1> Pie chart settings </h1>
         <h4> {pieChartSettings} </h4>

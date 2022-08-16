@@ -19,7 +19,6 @@ function successCallback(response: AxiosResponse) {
     return response;
 }
 function errorCallback(response: any) {
-    console.log(response)
     if (response.response.status === 401) {
         window.location.href = "http://localhost:3000/login"
     }

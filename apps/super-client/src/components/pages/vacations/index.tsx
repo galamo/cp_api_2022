@@ -24,7 +24,6 @@ export default function Vacations() {
     const clickingRef = useRef(0)
     const [showInput, setShowInput] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null)
-    console.log("Vacations Component render!")
 
     const addVacationHandler = useCallback(() => {
         setVacations([...vacations, currentVacation])
@@ -32,7 +31,6 @@ export default function Vacations() {
 
     const addVacationRefHandler = () => {
         const value: string | undefined = inputRef?.current?.value
-        console.log(value)
         setVacations([...vacations, value])
     }
 
@@ -54,7 +52,6 @@ export default function Vacations() {
     const setCounterHandlerRef = () => {
         clickingRef.current++
         c++;
-        console.log(`c value is: ${c}`)
         if (clickingRef.current > 3) {
             clickingRef.current = 0
             setShowMessage(true)
@@ -62,7 +59,6 @@ export default function Vacations() {
                 setShowMessage(false)
             }, 2000)
         }
-        console.log(clickingRef.current)
     }
 
     return (
