@@ -1,6 +1,7 @@
 import React, { createContext, Suspense, useReducer, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { store } from './store';
 import LComponent from "./LcComponent_legacy"
 import { CountriesPage } from './components/pages/countries';
 import ImageCp from './components/ui-components/imageCp';
@@ -17,7 +18,6 @@ import { CircularProgress } from '@material-ui/core';
 import Settings from './components/pages/settings';
 import SettingsProvider from './components/providers/settingsProvider';
 import { Provider } from 'react-redux';
-import { store } from './store';
 
 const ReportsLazy = React.lazy(() => import("./components/pages/reports"))
 const CountriesReportsPageLazy = React.lazy(() => import("./components/pages/countriesReports"))
