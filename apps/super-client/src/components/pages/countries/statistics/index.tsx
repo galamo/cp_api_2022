@@ -17,7 +17,8 @@ export function CountriesStatistics(props: IProps) {
     </div>
 }
 
-function calcTotalPopulation(countries: Array<any>): number {
+export function calcTotalPopulation(countries: Array<any>): number | undefined {
+    if (!Array.isArray(countries)) return;
     return countries.reduce((total, currentCountry: any) => {
         if (!currentCountry.population) return total;
         return total + Number(currentCountry.population || 0)
