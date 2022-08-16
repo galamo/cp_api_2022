@@ -291,12 +291,20 @@ based on your information
 1. Redux toolkit 
 2. Testing
 
-
-### EX - 13 
+### EX - 13
+Redux toolkit
+1. migrate the is utc state to the setting reducer
+2. create new reducer for reports and store the numbers/precentage state inside  
+### EX - 14 
 1. Write a unit test for region population calculation function - `calcPopulationPerRegion`
 - test correct flow
 - false positive
 - null / string calculation 
+
+
+### EX - 15
+1. Write a unit-ui test for setting the user name flow in redux
+2. assert that the user is rendered to the header 
 
 
 
