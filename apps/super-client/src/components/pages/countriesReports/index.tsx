@@ -33,7 +33,7 @@ export default function CountriesReportsPage() {
     const source = cancelToken.source()
     console.log(countries)
     const result = useMemo(() => {
-        return calcTotalPopulation(countries)
+        return calcPopulationPerRegion(countries)
     }, [JSON.stringify(countries)])
 
     const adaptedData = adaptDataPieChart(result)
@@ -86,7 +86,7 @@ function PopulationPieChart(props: { pieChartGlobalSettings: string, adaptedData
 }
 
 
-function calcTotalPopulation(countries: Array<any>): number {
+function calcPopulationPerRegion(countries: Array<any>): number {
     return countries.reduce((regionsObj, currentCountry: any) => {
         const { region, population } = currentCountry
         if (!region || !population) return regionsObj
