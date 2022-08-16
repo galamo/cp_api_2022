@@ -294,7 +294,12 @@ based on your information
 ### EX - 13
 Redux toolkit
 1. migrate the is utc state to the setting reducer
-    2. create new reducer for reports and store the numbers/precentage state inside  
+2. create new reducer for reports and store the numbers/precentage state inside  
+3. implement redirect to countries reports after loginSuccess 
+4. move register async operation to work with redux ( async function OR thunk)
+
+
+
 ### EX - 14 
 1. Write a unit test for region population calculation function - `calcPopulationPerRegion`
 - test correct flow

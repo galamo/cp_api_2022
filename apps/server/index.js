@@ -102,7 +102,9 @@ app.post("/auth/login", async (req, res, next) => {
         console.log(user, authUsers)
         if (user) {
             const token = jwt.sign({ userName, role: "viewer" }, 'token', { expiresIn: "1h" });
-            return res.json({ token })
+            setTimeout(() => {
+                return res.json({ token })
+            }, 2000)
         } else {
             return res.status(401).json({ message: "Unauthorized!" })
         }
