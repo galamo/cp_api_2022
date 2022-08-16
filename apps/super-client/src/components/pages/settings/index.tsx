@@ -1,7 +1,7 @@
 import { Button, Switch } from "@material-ui/core";
 import React, { useContext, useRef } from "react";
-import { useAppDispatch } from "../../../store/hooks";
-import { setUserName } from "../../../store/reducers/settingsReducers";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { RESOLUTION, setReportResolution, setUserName } from "../../../store/reducers/settingsReducers";
 import { SettingsContext } from "../../providers/settingsProvider";
 
 
@@ -14,12 +14,13 @@ export default function Settings() {
     const dispatchFn = dispatch as Function;
     const inputUserNameRef = useRef<HTMLInputElement>(null)
     const appDispatch = useAppDispatch()
+    const { token, resolution } = useAppSelector(state => state.settings)
 
     return <div>
         <h1> Pie chart settings </h1>
-        <h4> {pieChartSettings} </h4>
-        <Button onClick={() => { dispatchFn({ type: "SET_PIECHART_SETTINGS", payload: "precentage" }) }} > Precentage </Button>
-        <Button onClick={() => { dispatchFn({ type: "SET_PIECHART_SETTINGS", payload: "numbers" }) }} > Numbers </Button>
+        <h4> {resolution} </h4>
+        <Button onClick={() => { appDispatch(setReportResolution(RESOLUTION.PRECENTAGE)) }}> Precentage </Button>
+        <Button onClick={() => { appDispatch(setReportResolution(RESOLUTION.NUMBER)) }}> Numbers </Button>
         <Switch
             checked={isUtc}
             onChange={() => {
@@ -33,6 +34,10 @@ export default function Settings() {
                 appDispatch(setUserName(inputUserNameRef?.current?.value as string))
             }} > Set User Name </Button>
             <input ref={inputUserNameRef} />
+        </div>
+        <div>
+            <h1> Token: </h1>
+            <span> {token?.slice(0, 10)} </span>
         </div>
     </div>
 }

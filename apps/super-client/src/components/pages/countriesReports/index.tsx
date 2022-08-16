@@ -5,6 +5,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { negate } from "lodash";
 import { SettingsContext } from "../../providers/settingsProvider";
 import AppDate from "../../app/appDate";
+import { useAppSelector } from "../../../store/hooks";
 
 
 
@@ -27,6 +28,7 @@ export default function CountriesReportsPage() {
     const [countries, setCountries] = useState(countriesInitialState)
     const [isLoading, setIsLoading] = useState(false)
     const globalState = useContext(SettingsContext)
+    const { resolution } = useAppSelector(state => state.settings)
     const cancelToken = axios.CancelToken;
     const source = cancelToken.source()
 
@@ -70,9 +72,9 @@ export default function CountriesReportsPage() {
         </div>
         <div style={{ width: "500px", height: "100px", margin: "auto" }}>
 
-            <MemoizedPieChart pieChartGlobalSettings={globalState.pieChartSettings} adaptedData={adaptedData} />
-            <MemoizedPieChart pieChartGlobalSettings={globalState.pieChartSettings} adaptedData={data} />
-            <MemoizedPieChart pieChartGlobalSettings={globalState.pieChartSettings} adaptedData={adaptedData} />
+            <MemoizedPieChart pieChartGlobalSettings={resolution} adaptedData={adaptedData} />
+            <MemoizedPieChart pieChartGlobalSettings={resolution} adaptedData={data} />
+            <MemoizedPieChart pieChartGlobalSettings={resolution} adaptedData={adaptedData} />
 
 
         </div>

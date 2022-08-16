@@ -27,7 +27,7 @@ export default function ButtonAppBar() {
     const classes = useStyles();
     const context = useContext(SettingsContext)
     const { userName } = useAppSelector(state => state.settings)
-
+    console.log("App bar render!")
     return (
         <div className={classes.root}>
             <AppBar position="static">

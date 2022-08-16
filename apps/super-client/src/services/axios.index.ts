@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios"
-
-
+import { store } from "../store"
+import { setToken } from "../store/reducers/settingsReducers"
 export const axiosInstance: any = axios.create({ baseURL: "http://localhost:2200" })
 
 
@@ -16,7 +16,9 @@ axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
 
 axiosInstance.interceptors.response.use(successCallback, errorCallback)
 function successCallback(response: AxiosResponse) {
-    console.log("Response success")
+    if (response.data.token) {
+        store.dispatch(setToken(response.data.token))
+    }
     return response;
 }
 function errorCallback(response: any) {
