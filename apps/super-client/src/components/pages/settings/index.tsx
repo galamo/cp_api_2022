@@ -1,7 +1,8 @@
 import { Button, Switch } from "@material-ui/core";
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
+import { useAppDispatch } from "../../../store/hooks";
 import { SettingsContext } from "../../providers/settingsProvider";
-
+import { setUserName } from "../../../store/reducers/settingsReducers";
 
 
 
@@ -10,7 +11,9 @@ import { SettingsContext } from "../../providers/settingsProvider";
 export default function Settings() {
     const { dispatch, pieChartSettings, isUtc } = useContext(SettingsContext)
     const dispatchFn = dispatch as Function;
-    console.log("Update from Settings")
+    const inputRef = useRef<HTMLInputElement>(null)
+    const appDispatch = useAppDispatch()
+
     return <div>
         <h1> Pie chart settings </h1>
         <h4> {pieChartSettings} </h4>
@@ -23,5 +26,10 @@ export default function Settings() {
             }}
             name="is utc"
         />
+
+        <div>
+            <Button onClick={() => { appDispatch(setUserName(inputRef?.current?.value as string)) }}> SetUserName </Button>
+            <input ref={inputRef} />
+        </div>
     </div>
 }
