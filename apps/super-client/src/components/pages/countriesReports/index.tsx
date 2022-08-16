@@ -103,7 +103,6 @@ function PopulationPieChart(props: { pieChartGlobalSettings: string, adaptedData
 
 
 function calcTotalPopulation(countries: Array<any>): number {
-    console.log("Long Calculation executed")
     return countries.reduce((regionsObj, currentCountry: any) => {
         const { region, population } = currentCountry
         if (!region || !population) return regionsObj
