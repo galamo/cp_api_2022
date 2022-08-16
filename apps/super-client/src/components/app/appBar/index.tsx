@@ -27,7 +27,6 @@ export default function ButtonAppBar() {
     const classes = useStyles();
     const context = useContext(SettingsContext)
     const userName = useAppSelector(state => state.settings.userName)
-    console.log("App bar render!")
     return (
         <div className={classes.root}>
             <AppBar position="static">
@@ -35,7 +34,7 @@ export default function ButtonAppBar() {
                     <Typography variant="h6" className={classes.title}>
                         {routes.filter(r => r.isVisible).map((r: IRoute) => {
                             return <span key={r.path} className={css.linkButton}>
-                                <Link to={r.path}> {r.text.toUpperCase()}</Link>
+                                <Link id={r.text.toUpperCase()} to={r.path}> {r.text.toUpperCase()}</Link>
                             </span>
                         })}
                     </Typography>

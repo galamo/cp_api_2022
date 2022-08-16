@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import { BrowserRouter } from 'react-router-dom';
+import { act } from 'react-dom/test-utils';
 
 describe("Main Suite - App.tsx", () => {
   test("test_1", () => {
@@ -11,12 +13,22 @@ describe("Main Suite - App.tsx", () => {
     const result = 1 + a;
     expect(result).toBe(2)
   })
+
+  test("Render App", () => {
+    render(<App />)
+    const routeToCountriesReports = screen.getByText("COUNTRIES REPORTS")
+    expect(routeToCountriesReports).toBeInTheDocument()
+    act(() => {
+      routeToCountriesReports.click()
+    })
+    // const testHeaderw = screen.getByText("This Data is updated")
+    // expect(testHeader).toBeInTheDocument()
+  })
+
+
+
 })
 
 
 
-// test('renders learn react link', () => {
-//   render(<App />);
-//   const linkElement = screen.getByText(/learn react/i);
-//   expect(linkElement).toBeInTheDocument();
-// });
+

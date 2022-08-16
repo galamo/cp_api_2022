@@ -12,7 +12,7 @@ interface IProps {
 export default function CountryCard(props: IProps) {
     const { countryName, flag, region } = props
 
-    return <div className={css.card} style={{ display: "inline-block", margin: "10px" }}>
+    return <div id={countryName.toLocaleLowerCase()} className={css.card} style={{ display: "inline-block", margin: "10px" }}>
         <ImageCp imageUrl={flag} />
         <div className={css.card}>
             <Link to={`/country-page/${countryName}`}><h4>{countryName}</h4></Link>

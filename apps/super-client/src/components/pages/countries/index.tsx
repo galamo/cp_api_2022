@@ -57,7 +57,7 @@ export function CountriesPage() {
                 setCountries([...shuffle(countries)])
             }}> Shuffle </Button>
             <HeaderApplication text={"Countries Page"} color={"black"} />
-            <input type="text" onChange={textChangeHandler} />
+            <input id={"c_input"} type="text" onChange={textChangeHandler} />
             <br />
         </div>
         <div>
